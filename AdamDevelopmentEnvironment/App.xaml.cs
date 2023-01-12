@@ -8,13 +8,13 @@ using AdamDevelopmentEnvironment.Services.Interfaces;
 using AdamDevelopmentEnvironment.Views;
 using Prism.Ioc;
 using Prism.Modularity;
-using System.Windows;
+using HandyWindow = HandyControl.Controls.Window;
 
 namespace AdamDevelopmentEnvironment
 {
     public partial class App
     {
-        protected override Window CreateShell()
+        protected override HandyWindow CreateShell()
         {
             return Container.Resolve<MainWindow>();
         }

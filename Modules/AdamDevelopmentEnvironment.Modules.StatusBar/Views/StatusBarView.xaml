@@ -4,11 +4,15 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              mc:Ignorable="d" 
-             xmlns:prism="http://prismlibrary.com/"
+             xmlns:prism="http://prismlibrary.com/" 
+             xmlns:hc="https://handyorg.github.io/handycontrol"
              prism:ViewModelLocator.AutoWireViewModel="True" >
-    <Grid>
-        <TextBlock Text="{Binding Message}"
+
+    <hc:Watermark Mark="StatusBarRegion">
+        <Grid>
+            <TextBlock Text="{Binding Message}"
                    HorizontalAlignment="Center"
                    VerticalAlignment="Center" />
-    </Grid>
+        </Grid>
+    </hc:Watermark>
 </UserControl>

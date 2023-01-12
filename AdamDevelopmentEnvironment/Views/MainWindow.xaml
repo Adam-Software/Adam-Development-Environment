@@ -1,10 +1,16 @@
-﻿<Window x:Class="AdamDevelopmentEnvironment.Views.MainWindow"
+﻿<hc:BlurWindow  xmlns:hc="https://handyorg.github.io/handycontrol" 
+        x:Class="AdamDevelopmentEnvironment.Views.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:prism="http://prismlibrary.com/"
         prism:ViewModelLocator.AutoWireViewModel="True"
         xmlns:core="clr-namespace:AdamDevelopmentEnvironment.Core;assembly=AdamDevelopmentEnvironment.Core"
-        Title="{Binding Title}" Height="350" Width="525" >
+        WindowState="Maximized"
+        ResizeMode="CanResizeWithGrip"
+        WindowStartupLocation="CenterScreen"
+        ShowTitle="True" Title="{Binding Title}"
+        Style="{StaticResource  WindowBlur}">
+    
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
@@ -35,4 +41,4 @@
             prism:RegionManager.RegionName="{x:Static core:RegionNames.StatusBarRegion}" />
 
     </Grid>
-</Window>
+</hc:BlurWindow>
