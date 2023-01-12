@@ -1,0 +1,19 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net6.0-windows</TargetFramework>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Prism.DryIoc" Version="8.1.97" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\AdamDevelopmentEnvironment.Core\AdamDevelopmentEnvironment.Core.csproj" />
+    <ProjectReference Include="..\Modules\AdamDevelopmentEnvironment.Modules.Blockly\AdamDevelopmentEnvironment.Modules.Blockly.csproj" />
+    <ProjectReference Include="..\Modules\AdamDevelopmentEnvironment.Modules.ResultEditor\AdamDevelopmentEnvironment.Modules.ResultEditor.csproj" />
+    <ProjectReference Include="..\Modules\AdamDevelopmentEnvironment.Modules.SourceEditor\AdamDevelopmentEnvironment.Modules.SourceEditor.csproj" />
+    <ProjectReference Include="..\Modules\AdamDevelopmentEnvironment.Modules.StatusBar\AdamDevelopmentEnvironment.Modules.StatusBar.csproj" />
+    <ProjectReference Include="..\Services\AdamDevelopmentEnvironment.Services.Interfaces\AdamDevelopmentEnvironment.Services.Interfaces.csproj" />
+    <ProjectReference Include="..\Services\AdamDevelopmentEnvironment.Services\AdamDevelopmentEnvironment.Services.csproj" />
+  </ItemGroup>
+</Project>
