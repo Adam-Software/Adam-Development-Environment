@@ -37,4 +37,9 @@
       <ContainsDesignTimeResources>true</ContainsDesignTimeResources>
     </Page>
   </ItemGroup>
+  <ItemGroup>
+    <Page Update="Properties\DesignTimeResources.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
 </Project>

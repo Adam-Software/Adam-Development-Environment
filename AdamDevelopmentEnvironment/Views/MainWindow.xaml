@@ -14,31 +14,42 @@
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*"/>
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         
         <ContentControl Grid.Row="0"
                         Grid.Column="0"
-                        Grid.RowSpan="2"
-            prism:RegionManager.RegionName="{x:Static core:RegionNames.BlocklyRegion}" />
+                        Grid.RowSpan="3"
+                        prism:RegionManager.RegionName="{x:Static core:RegionNames.BlocklyRegion}"/>
+
+
+        <!-- Vertical splitter -->
+        <GridSplitter Grid.Column="1" Grid.Row="0" Grid.RowSpan="3" Background="{DynamicResource RegionBrush}"
+                      Width="3" VerticalAlignment="Stretch" HorizontalAlignment="Center"/>
 
         <ContentControl Grid.Row="0"
-                        Grid.Column="1"
-            prism:RegionManager.RegionName="{x:Static core:RegionNames.SourceEditorRegion}" />
+                        Grid.Column="2"
+                        prism:RegionManager.RegionName="{x:Static core:RegionNames.SourceEditorRegion}"/>
 
-        <ContentControl Grid.Row="1"
-                        Grid.Column="1"
-            prism:RegionManager.RegionName="{x:Static core:RegionNames.ResultsEditorRegion}" />
+        <!-- Horizontal splitter -->
+        <GridSplitter Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2" Background="{DynamicResource RegionBrush}"
+                      Height="3" HorizontalAlignment="Stretch" VerticalAlignment="Center"/>
 
         <ContentControl Grid.Row="2"
+                        Grid.Column="2"
+                        prism:RegionManager.RegionName="{x:Static core:RegionNames.ResultsEditorRegion}"/>
+
+        <ContentControl Grid.Row="3"
                         Grid.Column="0"
-                        Grid.ColumnSpan="2"
-            prism:RegionManager.RegionName="{x:Static core:RegionNames.StatusBarRegion}" />
+                        Grid.ColumnSpan="3"
+                        prism:RegionManager.RegionName="{x:Static core:RegionNames.StatusBarRegion}"/>
 
     </Grid>
 </hc:BlurWindow>

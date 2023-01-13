@@ -9,7 +9,7 @@
              prism:ViewModelLocator.AutoWireViewModel="True" >
 
     <StatusBar Height="30">
-        <StatusBarItem>
+        <StatusBarItem Background="{DynamicResource RegionBrush}">
             <StackPanel>
                 <TextBlock Text="Test status bar element"/>
             </StackPanel>

@@ -9,10 +9,11 @@
              prism:ViewModelLocator.AutoWireViewModel="True">
 
     <hc:Watermark Mark="ResultEditorRegion">
-        <Grid>
-            <TextBlock Text="{Binding Message}"
+        <Grid Background="{DynamicResource BackgroundBrush}">
+            <!--<hc:TextBox/>-->
+            <!--<TextBlock Text="{Binding Message}"
                    HorizontalAlignment="Center"
-                   VerticalAlignment="Center" />
+                   VerticalAlignment="Center" />-->
         </Grid>
     </hc:Watermark>
 </UserControl>

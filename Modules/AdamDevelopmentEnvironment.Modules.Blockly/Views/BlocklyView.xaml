@@ -8,11 +8,11 @@
              xmlns:hc="https://handyorg.github.io/handycontrol"
              prism:ViewModelLocator.AutoWireViewModel="True" >
 
-    <hc:Watermark Mark="BlocklyRegion">
-        <Grid>
-            <TextBlock Text="{Binding Message}"
+    <Grid Background="{DynamicResource BackgroundBrush}">
+        <!--<TextBlock Text="{Binding Message}"
                    HorizontalAlignment="Center"
-                   VerticalAlignment="Center"/>
-        </Grid>
-    </hc:Watermark>
+                   VerticalAlignment="Center"/>-->
+
+    </Grid>
+
 </UserControl>
