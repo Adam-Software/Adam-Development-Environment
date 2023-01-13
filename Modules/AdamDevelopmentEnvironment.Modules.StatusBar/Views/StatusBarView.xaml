@@ -8,11 +8,12 @@
              xmlns:hc="https://handyorg.github.io/handycontrol"
              prism:ViewModelLocator.AutoWireViewModel="True" >
 
-    <hc:Watermark Mark="StatusBarRegion">
-        <Grid>
-            <TextBlock Text="{Binding Message}"
-                   HorizontalAlignment="Center"
-                   VerticalAlignment="Center" />
-        </Grid>
-    </hc:Watermark>
+    <StatusBar Height="30">
+        <StatusBarItem>
+            <StackPanel>
+                <TextBlock Text="Test status bar element"/>
+            </StackPanel>
+        </StatusBarItem>
+    </StatusBar>
+    
 </UserControl>

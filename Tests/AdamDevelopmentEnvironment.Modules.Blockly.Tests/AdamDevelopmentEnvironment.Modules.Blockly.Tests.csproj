@@ -5,7 +5,7 @@
 
     <IsPackable>false</IsPackable>
 
-    <PackageLicenseExpression> MIT</PackageLicenseExpression>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
   </PropertyGroup>
 
   <ItemGroup>
