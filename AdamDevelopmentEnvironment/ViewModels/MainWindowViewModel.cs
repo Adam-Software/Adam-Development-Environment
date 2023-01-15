@@ -1,4 +1,5 @@
 ﻿using Prism.Mvvm;
+using System.Windows;
 
 namespace AdamDevelopmentEnvironment.ViewModels
 {
@@ -15,5 +16,26 @@ namespace AdamDevelopmentEnvironment.ViewModels
         {
 
         }
+
+        private double mVerticalSplitterLength = Properties.Settings.Default.VerticalSplitterLength;
+        private double mHorizontalSplitterLength = Properties.Settings.Default.HorizontalSplitterLength;
+        public GridLength VerticalSplitterLength 
+        { 
+            get 
+            {
+                if (mVerticalSplitterLength == 0)
+                    return GridLength.Auto;
+
+                return new GridLength(mVerticalSplitterLength);
+            }
+
+            set
+            {
+                SetProperty(ref mVerticalSplitterLength, value.Value);
+                Properties.Settings.Default.VerticalSplitterLength = value.Value;
+            } 
+        }
+
+        public GridLength HorizontalSplitterLength { get; private set; }
     }
 }
