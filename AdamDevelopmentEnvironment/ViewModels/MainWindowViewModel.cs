@@ -1,13 +1,14 @@
 ﻿using Prism.Mvvm;
 using System.Windows;
+using Settings = AdamDevelopmentEnvironment.Core.Properties.Settings;
 
 namespace AdamDevelopmentEnvironment.ViewModels
 {
     public class MainWindowViewModel : BindableBase
     {
         private string mTitle = "Prism Application";
-        private double mBlocklyWidthRegion = Properties.Settings.Default.BlocklyWidthRegion;
-        private double mSourceEditorHeight = Properties.Settings.Default.SourceEditorHeight;
+        private double mBlocklyWidthRegion = Settings.Default.BlocklyWidthRegion;
+        private double mSourceEditorHeight = Settings.Default.SourceEditorHeight;
 
         public string Title
         {
@@ -40,7 +41,7 @@ namespace AdamDevelopmentEnvironment.ViewModels
             set
             {
                 SetProperty(ref mBlocklyWidthRegion, value.Value);
-                Properties.Settings.Default.BlocklyWidthRegion = value.Value;
+                Settings.Default.BlocklyWidthRegion = value.Value;
             } 
         }
 
@@ -57,7 +58,7 @@ namespace AdamDevelopmentEnvironment.ViewModels
             set
             {
                 SetProperty(ref mSourceEditorHeight, value.Value);
-                Properties.Settings.Default.SourceEditorHeight = value.Value;
+                Settings.Default.SourceEditorHeight = value.Value;
             } 
         }
 

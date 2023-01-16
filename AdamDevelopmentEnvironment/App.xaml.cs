@@ -10,7 +10,7 @@ using Bluegrams.Application;
 using Prism.Ioc;
 using Prism.Modularity;
 using HandyWindow = HandyControl.Controls.Window;
-using Settings = AdamDevelopmentEnvironment.Properties.Settings;
+using Settings = AdamDevelopmentEnvironment.Core.Properties.Settings;
 
 namespace AdamDevelopmentEnvironment
 {
@@ -36,9 +36,9 @@ namespace AdamDevelopmentEnvironment
 
         protected override void OnExit(System.Windows.ExitEventArgs e)
         {
-            base.OnExit(e);
-
             Settings.Default.PropertyChanged -= OnPropertyChange;
+
+            base.OnExit(e);
         }
 
         private void OnPropertyChange(object sender, System.ComponentModel.PropertyChangedEventArgs e)
