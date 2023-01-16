@@ -23,12 +23,13 @@ namespace AdamDevelopmentEnvironment
 
         protected override void OnStartup(System.Windows.StartupEventArgs e)
         {
+            // Saved settings in app folder (PortableSettingsProvider nuget package)
             PortableSettingsProvider.SettingsFileName = "settings.config";
             PortableSettingsProvider.ApplyProvider(Settings.Default);
 
             base.OnStartup(e);
 
-            // fires after change
+            // Fires after change
             // Settings.Default.SettingChanging fires BEFORE change
             Settings.Default.PropertyChanged += OnPropertyChange;
         }

@@ -20,6 +20,13 @@ namespace AdamDevelopmentEnvironment.ViewModels
 
         }
 
+        /// <summary>
+        /// The fields determine the position of the splitters relative to the 
+        /// left/top element and save it in the settings.
+        /// If there are no saved settings, then the fields return a division by *.
+        /// </summary>
+        #region Position of splitters
+
         public GridLength BlocklyWidthRegion 
         { 
             get 
@@ -53,5 +60,7 @@ namespace AdamDevelopmentEnvironment.ViewModels
                 Properties.Settings.Default.SourceEditorHeight = value.Value;
             } 
         }
+
+        #endregion
     }
 }
