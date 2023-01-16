@@ -12,7 +12,7 @@ namespace AdamDevelopmentEnvironment.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "17.5.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "17.4.0.0")]
     internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
         
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
@@ -26,24 +26,24 @@ namespace AdamDevelopmentEnvironment.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("0")]
-        public double VerticalSplitterLength {
+        public double BlocklyWidthRegion {
             get {
-                return ((double)(this["VerticalSplitterLength"]));
+                return ((double)(this["BlocklyWidthRegion"]));
             }
             set {
-                this["VerticalSplitterLength"] = value;
+                this["BlocklyWidthRegion"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("0")]
-        public double HorizontalSplitterLength {
+        public double SourceEditorHeight {
             get {
-                return ((double)(this["HorizontalSplitterLength"]));
+                return ((double)(this["SourceEditorHeight"]));
             }
             set {
-                this["HorizontalSplitterLength"] = value;
+                this["SourceEditorHeight"] = value;
             }
         }
     }

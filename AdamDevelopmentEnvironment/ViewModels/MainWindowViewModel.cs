@@ -5,11 +5,14 @@ namespace AdamDevelopmentEnvironment.ViewModels
 {
     public class MainWindowViewModel : BindableBase
     {
-        private string _title = "Prism Application";
+        private string mTitle = "Prism Application";
+        private double mBlocklyWidthRegion = Properties.Settings.Default.BlocklyWidthRegion;
+        private double mSourceEditorHeight = Properties.Settings.Default.SourceEditorHeight;
+
         public string Title
         {
-            get { return _title; }
-            set { SetProperty(ref _title, value); }
+            get { return mTitle; }
+            set { SetProperty(ref mTitle, value); }
         }
 
         public MainWindowViewModel()
@@ -17,25 +20,38 @@ namespace AdamDevelopmentEnvironment.ViewModels
 
         }
 
-        private double mVerticalSplitterLength = Properties.Settings.Default.VerticalSplitterLength;
-        private double mHorizontalSplitterLength = Properties.Settings.Default.HorizontalSplitterLength;
-        public GridLength VerticalSplitterLength 
+        public GridLength BlocklyWidthRegion 
         { 
             get 
             {
-                if (mVerticalSplitterLength == 0)
-                    return GridLength.Auto;
+                if (mBlocklyWidthRegion == 0)
+                    return new GridLength(1, GridUnitType.Star);
 
-                return new GridLength(mVerticalSplitterLength);
+                return new GridLength(mBlocklyWidthRegion);
             }
 
             set
             {
-                SetProperty(ref mVerticalSplitterLength, value.Value);
-                Properties.Settings.Default.VerticalSplitterLength = value.Value;
+                SetProperty(ref mBlocklyWidthRegion, value.Value);
+                Properties.Settings.Default.BlocklyWidthRegion = value.Value;
             } 
         }
 
-        public GridLength HorizontalSplitterLength { get; private set; }
+        public GridLength SourceEditorHeight 
+        {
+            get
+            {
+                if (mSourceEditorHeight == 0)
+                    return new GridLength(1, GridUnitType.Star);
+
+                return new GridLength(mSourceEditorHeight);
+            }
+
+            set
+            {
+                SetProperty(ref mSourceEditorHeight, value.Value);
+                Properties.Settings.Default.SourceEditorHeight = value.Value;
+            } 
+        }
     }
 }

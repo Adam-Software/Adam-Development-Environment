@@ -2,10 +2,10 @@
 <SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="AdamDevelopmentEnvironment.Properties" GeneratedClassName="Settings">
   <Profiles />
   <Settings>
-    <Setting Name="VerticalSplitterLength" Type="System.Double" Scope="User">
+    <Setting Name="BlocklyWidthRegion" Type="System.Double" Scope="User">
       <Value Profile="(Default)">0</Value>
     </Setting>
-    <Setting Name="HorizontalSplitterLength" Type="System.Double" Scope="User">
+    <Setting Name="SourceEditorHeight" Type="System.Double" Scope="User">
       <Value Profile="(Default)">0</Value>
     </Setting>
   </Settings>

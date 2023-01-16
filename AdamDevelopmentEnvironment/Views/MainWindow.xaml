@@ -4,7 +4,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:prism="http://prismlibrary.com/"
         prism:ViewModelLocator.AutoWireViewModel="True"
-        xmlns:core="clr-namespace:AdamDevelopmentEnvironment.Core;assembly=AdamDevelopmentEnvironment.Core"
+        xmlns:core="clr-namespace:AdamDevelopmentEnvironment.Core;assembly=AdamDevelopmentEnvironment.Core" 
         WindowState="Maximized"
         ResizeMode="CanResizeWithGrip"
         WindowStartupLocation="CenterScreen"
@@ -13,12 +13,12 @@
     
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="{Binding BlocklyWidthRegion, Mode=TwoWay}"/>
             <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="{Binding SourceEditorHeight, Mode=TwoWay}"/>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto" />

@@ -6,6 +6,7 @@ using AdamDevelopmentEnvironment.Modules.StatusBar;
 using AdamDevelopmentEnvironment.Services;
 using AdamDevelopmentEnvironment.Services.Interfaces;
 using AdamDevelopmentEnvironment.Views;
+using Bluegrams.Application;
 using Prism.Ioc;
 using Prism.Modularity;
 using HandyWindow = HandyControl.Controls.Window;
@@ -22,12 +23,14 @@ namespace AdamDevelopmentEnvironment
 
         protected override void OnStartup(System.Windows.StartupEventArgs e)
         {
+            PortableSettingsProvider.SettingsFileName = "settings.config";
+            PortableSettingsProvider.ApplyProvider(Settings.Default);
+
             base.OnStartup(e);
 
             // fires after change
             // Settings.Default.SettingChanging fires BEFORE change
             Settings.Default.PropertyChanged += OnPropertyChange;
-            
         }
 
         protected override void OnExit(System.Windows.ExitEventArgs e)
