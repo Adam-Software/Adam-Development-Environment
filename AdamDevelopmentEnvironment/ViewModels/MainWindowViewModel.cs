@@ -1,4 +1,8 @@
-﻿using Prism.Mvvm;
+﻿using AdamDevelopmentEnvironment.Views;
+using Prism.Commands;
+using Prism.Mvvm;
+using Prism.Regions;
+using Prism.Services.Dialogs;
 using System.Windows;
 using Settings = AdamDevelopmentEnvironment.Core.Properties.Settings;
 
@@ -6,20 +10,22 @@ namespace AdamDevelopmentEnvironment.ViewModels
 {
     public class MainWindowViewModel : BindableBase
     {
-        private string mTitle = "Prism Application";
+        public DelegateCommand OpenSettingsWindowCommand { get; private set; }
+
+        private readonly IRegionManager mRegion;
+        private readonly IDialogService mDialogService;
         private double mBlocklyWidthRegion = Settings.Default.BlocklyWidthRegion;
         private double mSourceEditorHeight = Settings.Default.SourceEditorHeight;
 
-        public string Title
+        public MainWindowViewModel(IRegionManager regionManager, IDialogService dialogService)
         {
-            get { return mTitle; }
-            set { SetProperty(ref mTitle, value); }
+            mRegion = regionManager;
+            mDialogService = dialogService;
+
+            OpenSettingsWindowCommand = new DelegateCommand(ShowSettingsDialog);
         }
 
-        public MainWindowViewModel()
-        {
-
-        }
+        public string Title => "Adam Development Environment";
 
         /// <summary>
         /// The fields determine the position of the splitters relative to the 
@@ -63,5 +69,10 @@ namespace AdamDevelopmentEnvironment.ViewModels
         }
 
         #endregion
+
+        private void ShowSettingsDialog()
+        {
+            mDialogService.ShowDialog(nameof(SettingsWindow));
+        }
     }
 }

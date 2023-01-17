@@ -34,6 +34,23 @@ namespace AdamDevelopmentEnvironment
             Settings.Default.PropertyChanged += OnPropertyChange;
         }
 
+        protected override void RegisterTypes(IContainerRegistry containerRegistry)
+        {
+            //services
+            containerRegistry.RegisterSingleton<IMessageService, MessageService>();
+
+            //window
+            containerRegistry.RegisterDialog<SettingsWindow>();
+        }
+
+        protected override void ConfigureModuleCatalog(IModuleCatalog moduleCatalog)
+        {
+            moduleCatalog.AddModule<BlocklyModule>();
+            moduleCatalog.AddModule<SourceEditorModule>();
+            moduleCatalog.AddModule<ResultEditorModule>();
+            moduleCatalog.AddModule<StatusBarModule>();
+        }
+
         protected override void OnExit(System.Windows.ExitEventArgs e)
         {
             Settings.Default.PropertyChanged -= OnPropertyChange;
@@ -44,19 +61,6 @@ namespace AdamDevelopmentEnvironment
         private void OnPropertyChange(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
             Settings.Default.Save();
-        }
-
-        protected override void RegisterTypes(IContainerRegistry containerRegistry)
-        {
-            containerRegistry.RegisterSingleton<IMessageService, MessageService>();
-        }
-
-        protected override void ConfigureModuleCatalog(IModuleCatalog moduleCatalog)
-        {
-            moduleCatalog.AddModule<BlocklyModule>();
-            moduleCatalog.AddModule<SourceEditorModule>();
-            moduleCatalog.AddModule<ResultEditorModule>();
-            moduleCatalog.AddModule<StatusBarModule>();
         }
     }
 }

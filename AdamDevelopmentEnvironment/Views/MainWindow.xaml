@@ -10,7 +10,20 @@
         WindowStartupLocation="CenterScreen"
         ShowTitle="True" Title="{Binding Title}"
         Style="{StaticResource  WindowBlur}">
+
+    <!--#region NonClientAreaContent -->
     
+    <hc:BlurWindow.NonClientAreaContent>
+        <Button HorizontalAlignment="Right" 
+                Name="ButtonConfig" 
+                Style="{StaticResource ButtonIcon}" 
+                Foreground="{DynamicResource PrimaryTextBrush}" 
+                hc:IconElement.Geometry="{StaticResource ConfigGeometry}"
+                Command="{Binding OpenSettingsWindowCommand}" />
+    </hc:BlurWindow.NonClientAreaContent>
+    
+    <!--#endregion-->
+
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="{Binding BlocklyWidthRegion, Mode=TwoWay}"/>
