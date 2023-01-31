@@ -3,6 +3,7 @@ using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Regions;
 using Prism.Services.Dialogs;
+using System;
 using System.Windows;
 using Settings = AdamDevelopmentEnvironment.Core.Properties.Settings;
 
@@ -11,6 +12,7 @@ namespace AdamDevelopmentEnvironment.ViewModels
     public class MainWindowViewModel : BindableBase
     {
         public DelegateCommand OpenSettingsWindowCommand { get; private set; }
+        public DelegateCommand OpenChatCommand { get; private set; }
 
         private readonly IRegionManager mRegion;
         private readonly IDialogService mDialogService;
@@ -23,7 +25,9 @@ namespace AdamDevelopmentEnvironment.ViewModels
             mDialogService = dialogService;
 
             OpenSettingsWindowCommand = new DelegateCommand(ShowSettingsDialog);
+            OpenChatCommand = new DelegateCommand(ShowChatDialog);
         }
+
 
         public string Title => "Adam Development Environment";
 
@@ -73,6 +77,11 @@ namespace AdamDevelopmentEnvironment.ViewModels
         private void ShowSettingsDialog()
         {
             mDialogService.ShowDialog(nameof(SettingsWindow));
+        }
+
+        private void ShowChatDialog()
+        {
+            mDialogService.ShowDialog(nameof(ChatWindow));
         }
     }
 }

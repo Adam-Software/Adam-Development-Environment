@@ -1,10 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using AdamDevelopmentEnvironment.Services.Interfaces;
 
 namespace AdamDevelopmentEnvironment.Services
 {
-    internal class ChatBotservice
+    public class ChatBotService : IChatBotService
     {
+        public string GetMessage(string queryMessage)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public string GetStatus()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public async void LoginUserIfNeeded()
+        {
+            using var client = new WTelegram.Client();
+            var myself = await client.LoginUserIfNeeded();
+        }
     }
 }

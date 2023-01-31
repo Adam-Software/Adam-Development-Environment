@@ -1,5 +1,6 @@
-﻿<hc:BlurWindow  xmlns:hc="https://handyorg.github.io/handycontrol" 
+﻿<hc:BlurWindow  
         x:Class="AdamDevelopmentEnvironment.Views.MainWindow"
+        xmlns:hc="https://handyorg.github.io/handycontrol" 
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:prism="http://prismlibrary.com/"
@@ -14,12 +15,23 @@
     <!--#region NonClientAreaContent -->
     
     <hc:BlurWindow.NonClientAreaContent>
-        <Button HorizontalAlignment="Right" 
-                Name="ButtonConfig" 
-                Style="{StaticResource ButtonIcon}" 
-                Foreground="{DynamicResource PrimaryTextBrush}" 
-                hc:IconElement.Geometry="{StaticResource ConfigGeometry}"
-                Command="{Binding OpenSettingsWindowCommand}" />
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+            <Button Name="ButtonConfig" 
+                    Style="{StaticResource ButtonIcon}" 
+                    Foreground="{DynamicResource PrimaryTextBrush}" 
+                    hc:IconElement.Geometry="{StaticResource ConfigGeometry}"
+                    Command="{Binding OpenSettingsWindowCommand}" />
+
+            <Button Name="ButtonChat"
+                    Style="{StaticResource ButtonIcon}"
+                    Foreground="{DynamicResource PrimaryTextBrush}"
+                    hc:IconElement.Geometry="{StaticResource AskGeometry}"
+                    Command="{Binding OpenChatCommand}"
+                    
+                    />
+        </StackPanel>
+        
+
     </hc:BlurWindow.NonClientAreaContent>
     
     <!--#endregion-->

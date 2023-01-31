@@ -27,20 +27,22 @@ namespace AdamDevelopmentEnvironment
             PortableSettingsProvider.SettingsFileName = "settings.config";
             PortableSettingsProvider.ApplyProvider(Settings.Default);
 
-            base.OnStartup(e);
-
             // Fires after change
             // Settings.Default.SettingChanging fires BEFORE change
             Settings.Default.PropertyChanged += OnPropertyChange;
+
+            base.OnStartup(e);
         }
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
             //services
             containerRegistry.RegisterSingleton<IMessageService, MessageService>();
+            containerRegistry.RegisterInstance<IChatBotService>(new ChatBotService());
 
             //window
             containerRegistry.RegisterDialog<SettingsWindow>();
+            containerRegistry.RegisterDialog<ChatWindow>(); 
         }
 
         protected override void ConfigureModuleCatalog(IModuleCatalog moduleCatalog)

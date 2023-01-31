@@ -5,7 +5,6 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:AdamDevelopmentEnvironment.Views"
       xmlns:prism="http://prismlibrary.com/"
-      mc:Ignorable="d"
       prism:ViewModelLocator.AutoWireViewModel="True">
 
     <prism:Dialog.WindowStyle>
