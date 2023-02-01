@@ -14,10 +14,11 @@ namespace AdamDevelopmentEnvironment.Services
             throw new System.NotImplementedException();
         }
 
-        public async void LoginUserIfNeeded()
+        public async void LoginUserIfNeeded(string phoneNumber)
         {
-            using var client = new WTelegram.Client();
-            var myself = await client.LoginUserIfNeeded();
+            using var client = new WTelegram.Client(21098574, "175a7fe86facf1cacb3c54c63f46f83a");
+            _ = await client.LoginUserIfNeeded();
+            _ = await client.Login(phoneNumber);
         }
     }
 }

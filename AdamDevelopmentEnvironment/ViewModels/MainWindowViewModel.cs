@@ -11,6 +11,7 @@ namespace AdamDevelopmentEnvironment.ViewModels
 {
     public class MainWindowViewModel : BindableBase
     {
+        public string Title => "Adam Development Environment";
         public DelegateCommand OpenSettingsWindowCommand { get; private set; }
         public DelegateCommand OpenChatCommand { get; private set; }
 
@@ -27,9 +28,6 @@ namespace AdamDevelopmentEnvironment.ViewModels
             OpenSettingsWindowCommand = new DelegateCommand(ShowSettingsDialog);
             OpenChatCommand = new DelegateCommand(ShowChatDialog);
         }
-
-
-        public string Title => "Adam Development Environment";
 
         /// <summary>
         /// The fields determine the position of the splitters relative to the 

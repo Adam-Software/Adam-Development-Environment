@@ -1,10 +1,19 @@
-﻿using Prism.Services.Dialogs;
+﻿using AdamDevelopmentEnvironment.Core.Mvvm;
+using AdamDevelopmentEnvironment.Services.Interfaces;
+using Prism.Regions;
+using Prism.Services.Dialogs;
 using System;
 
 namespace AdamDevelopmentEnvironment.ViewModels
 {
-    class SettingsWindowViewModel : IDialogAware
+    class SettingsWindowViewModel : RegionViewModelBase, IDialogAware
     {
+       
+        public SettingsWindowViewModel(IRegionManager regionManager, IChatBotService chatBotService) : base(regionManager)
+        {
+            
+        }
+        
         public string Title => "Настройки приложения";
 
         public event Action<IDialogResult> RequestClose;
@@ -12,17 +21,16 @@ namespace AdamDevelopmentEnvironment.ViewModels
         public bool CanCloseDialog()
         {
             return true;
-            //throw new NotImplementedException();
         }
 
         public void OnDialogClosed()
         {
-            //throw new NotImplementedException();
+           
         }
 
         public void OnDialogOpened(IDialogParameters parameters)
         {
-            //throw new NotImplementedException();
+            
         }
     }
 }
