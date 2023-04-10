@@ -9,9 +9,6 @@
              prism:ViewModelLocator.AutoWireViewModel="True" >
 
     <Grid Background="{DynamicResource BackgroundBrush}">
-        <!--<TextBlock Text="{Binding Message}"
-                   HorizontalAlignment="Center"
-                   VerticalAlignment="Center"/>-->
 
     </Grid>
 

@@ -1,9 +1,5 @@
-﻿using AdamDevelopmentEnvironment.Views;
-using Prism.Commands;
-using Prism.Mvvm;
-using Prism.Regions;
+﻿using Prism.Mvvm;
 using Prism.Services.Dialogs;
-using System;
 using System.Windows;
 using Settings = AdamDevelopmentEnvironment.Core.Properties.Settings;
 
@@ -12,21 +8,13 @@ namespace AdamDevelopmentEnvironment.ViewModels
     public class MainWindowViewModel : BindableBase
     {
         public string Title => "Adam Development Environment";
-        public DelegateCommand OpenSettingsWindowCommand { get; private set; }
-        public DelegateCommand OpenChatCommand { get; private set; }
 
-        private readonly IRegionManager mRegion;
-        private readonly IDialogService mDialogService;
         private double mBlocklyWidthRegion = Settings.Default.BlocklyWidthRegion;
         private double mSourceEditorHeight = Settings.Default.SourceEditorHeight;
 
-        public MainWindowViewModel(IRegionManager regionManager, IDialogService dialogService)
+        public MainWindowViewModel(IDialogService dialogService)
         {
-            mRegion = regionManager;
-            mDialogService = dialogService;
-
-            OpenSettingsWindowCommand = new DelegateCommand(ShowSettingsDialog);
-            OpenChatCommand = new DelegateCommand(ShowChatDialog);
+        
         }
 
         /// <summary>
@@ -71,15 +59,5 @@ namespace AdamDevelopmentEnvironment.ViewModels
         }
 
         #endregion
-
-        private void ShowSettingsDialog()
-        {
-            mDialogService.ShowDialog(nameof(SettingsWindow));
-        }
-
-        private void ShowChatDialog()
-        {
-            mDialogService.ShowDialog(nameof(ChatWindow));
-        }
     }
 }

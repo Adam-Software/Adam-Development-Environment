@@ -10,10 +10,7 @@
 
     <hc:Watermark Mark="ResultEditorRegion">
         <Grid Background="{DynamicResource BackgroundBrush}">
-            <!--<hc:TextBox/>-->
-            <!--<TextBlock Text="{Binding Message}"
-                   HorizontalAlignment="Center"
-                   VerticalAlignment="Center" />-->
+            
         </Grid>
     </hc:Watermark>
 </UserControl>

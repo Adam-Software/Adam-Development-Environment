@@ -3,8 +3,6 @@ using AdamDevelopmentEnvironment.Modules.Blockly;
 using AdamDevelopmentEnvironment.Modules.ResultEditor;
 using AdamDevelopmentEnvironment.Modules.SourceEditor;
 using AdamDevelopmentEnvironment.Modules.StatusBar;
-using AdamDevelopmentEnvironment.Services;
-using AdamDevelopmentEnvironment.Services.Interfaces;
 using AdamDevelopmentEnvironment.Views;
 using Bluegrams.Application;
 using Prism.Ioc;
@@ -37,12 +35,7 @@ namespace AdamDevelopmentEnvironment
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
             //services
-            containerRegistry.RegisterSingleton<IMessageService, MessageService>();
-            containerRegistry.RegisterInstance<IChatBotService>(new ChatBotService());
-
-            //window
-            containerRegistry.RegisterDialog<SettingsWindow>();
-            containerRegistry.RegisterDialog<ChatWindow>(); 
+            //containerRegistry.RegisterInstance<IChatBotService>(new ChatBotService());
         }
 
         protected override void ConfigureModuleCatalog(IModuleCatalog moduleCatalog)

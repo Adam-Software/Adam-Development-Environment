@@ -9,10 +9,7 @@
              prism:ViewModelLocator.AutoWireViewModel="True">
 
     <Grid Background="{DynamicResource BackgroundBrush}">
-        <!--<hc:AutoCompleteTextBox />-->
-        <!--<TextBlock Text="{Binding Message}"
-                   HorizontalAlignment="Center"
-                   VerticalAlignment="Center"/>-->
+
     </Grid>
     
 </UserControl>

@@ -16,21 +16,14 @@
     
     <hc:BlurWindow.NonClientAreaContent>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-            <Button Name="ButtonConfig" 
+
+            <!--<Button Name="ButtonConfig" 
                     Style="{StaticResource ButtonIcon}" 
                     Foreground="{DynamicResource PrimaryTextBrush}" 
                     hc:IconElement.Geometry="{StaticResource ConfigGeometry}"
-                    Command="{Binding OpenSettingsWindowCommand}" />
+                    Command="{Binding OpenSettingsWindowCommand}" />-->
 
-            <Button Name="ButtonChat"
-                    Style="{StaticResource ButtonIcon}"
-                    Foreground="{DynamicResource PrimaryTextBrush}"
-                    hc:IconElement.Geometry="{StaticResource AskGeometry}"
-                    Command="{Binding OpenChatCommand}"
-                    
-                    />
         </StackPanel>
-        
 
     </hc:BlurWindow.NonClientAreaContent>
     

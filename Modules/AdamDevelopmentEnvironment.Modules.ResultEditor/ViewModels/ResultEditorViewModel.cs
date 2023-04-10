@@ -1,27 +1,19 @@
 ﻿using AdamDevelopmentEnvironment.Core.Mvvm;
-using AdamDevelopmentEnvironment.Services.Interfaces;
 using Prism.Regions;
 
 namespace AdamDevelopmentEnvironment.Modules.ResultEditor.ViewModels
 {
     public class ResultEditorViewModel : RegionViewModelBase
     {
-        private string mMessage;
-        public string Message
-        {
-            get { return mMessage; }
-            set { SetProperty(ref mMessage, value); }
-        }
 
-        public ResultEditorViewModel(IRegionManager regionManager, IMessageService messageService) :
-            base(regionManager)
+        public ResultEditorViewModel(IRegionManager regionManager) : base(regionManager)
         {
-            Message = messageService.GetMessage();
+            
         }
 
         public override void OnNavigatedTo(NavigationContext navigationContext)
         {
-            //do something
+            
         }
     }
 }

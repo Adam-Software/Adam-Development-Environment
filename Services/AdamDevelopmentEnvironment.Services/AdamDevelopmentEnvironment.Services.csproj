@@ -6,10 +6,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="WTelegramClient" Version="3.2.1" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\AdamDevelopmentEnvironment.Services.Interfaces\AdamDevelopmentEnvironment.Services.Interfaces.csproj" />
   </ItemGroup>
 
