@@ -10,8 +10,6 @@ using Bluegrams.Application;
 using Prism.DryIoc;
 using Prism.Ioc;
 using Prism.Modularity;
-using Serilog;
-using System;
 using System.Windows.Threading;
 using HandyWindow = HandyControl.Controls.Window;
 using Settings = AdamDevelopmentEnvironment.Core.Properties.Settings;
@@ -20,11 +18,11 @@ namespace AdamDevelopmentEnvironment
 {
     public partial class App : PrismApplication
     {
-        private ILoggerService mILoggerService { get; set; } = new LoggerService();
+        private ILoggerService LoggerService { get; set; } = new LoggerService();
 
         public App()
         {
-            Dispatcher.UnhandledException += this.OnDispatcherUnhandledException;
+            Dispatcher.UnhandledException += OnDispatcherUnhandledException;
         }
 
 
@@ -48,7 +46,7 @@ namespace AdamDevelopmentEnvironment
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
-            containerRegistry.RegisterInstance(mILoggerService);
+            containerRegistry.RegisterSingleton<ILoggerService>(()=> LoggerService);
         }
 
         protected override void ConfigureModuleCatalog(IModuleCatalog moduleCatalog)
@@ -61,8 +59,7 @@ namespace AdamDevelopmentEnvironment
 
         protected override void OnExit(System.Windows.ExitEventArgs e)
         {
-            mILoggerService.WriteLog($"App close with code {e.ApplicationExitCode}");
-
+            LoggerService.WriteInformationLog($"App close with code {e.ApplicationExitCode}");
             OnAppCrashOrExit();
 
             base.OnExit(e);
@@ -70,16 +67,14 @@ namespace AdamDevelopmentEnvironment
 
         private void OnDispatcherUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)
         {
-            //TODO make this ErrorLog
-            mILoggerService.WriteLog($"Unhandled exception: {e.Exception}");
-
+            LoggerService.WriteFatalLog($"Unhandled exception: {e.Exception}");
             OnAppCrashOrExit();
         }
 
         private void OnAppCrashOrExit()
         {
             Settings.Default.PropertyChanged -= OnPropertyChange;
-            mILoggerService.Dispose();
+            LoggerService.Dispose();
         }
 
         private void OnPropertyChange(object sender, System.ComponentModel.PropertyChangedEventArgs e)

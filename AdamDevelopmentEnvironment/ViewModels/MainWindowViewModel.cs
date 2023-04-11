@@ -14,8 +14,7 @@ namespace AdamDevelopmentEnvironment.ViewModels
 
         public MainWindowViewModel(ILoggerService loggerService)
         {
-            loggerService.WriteLog("App load");
-        
+            loggerService.WriteInformationLog("Main window loaded");
         }
 
        
