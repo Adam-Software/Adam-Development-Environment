@@ -1,5 +1,5 @@
-﻿using Prism.Mvvm;
-using Prism.Services.Dialogs;
+﻿using AdamDevelopmentEnvironment.Services.Interfaces;
+using Prism.Mvvm;
 using System.Windows;
 using Settings = AdamDevelopmentEnvironment.Core.Properties.Settings;
 
@@ -12,11 +12,13 @@ namespace AdamDevelopmentEnvironment.ViewModels
         private double mBlocklyWidthRegion = Settings.Default.BlocklyWidthRegion;
         private double mSourceEditorHeight = Settings.Default.SourceEditorHeight;
 
-        public MainWindowViewModel(IDialogService dialogService)
+        public MainWindowViewModel(ILoggerService loggerService)
         {
+            loggerService.WriteLog("App load");
         
         }
 
+       
         /// <summary>
         /// The fields determine the position of the splitters relative to the 
         /// left/top element and save it in the settings.
