@@ -11,10 +11,13 @@ namespace AdamDevelopmentEnvironment.ViewModels
 
         private double mBlocklyWidthRegion = Settings.Default.BlocklyWidthRegion;
         private double mSourceEditorHeight = Settings.Default.SourceEditorHeight;
+        private ILoggerService LoggerService { get; set; }
 
         public MainWindowViewModel(ILoggerService loggerService)
         {
-            loggerService.WriteInformationLog("Main window loaded");
+            LoggerService = loggerService;
+            LoggerService.WriteInformationLog("Main window loaded");
+            //loggerService.WriteInformationLog("Main window loaded");
         }
 
        
@@ -37,6 +40,7 @@ namespace AdamDevelopmentEnvironment.ViewModels
 
             set
             {
+                LoggerService.WriteInformationLog($"Update {nameof(BlocklyWidthRegion)} with value {value.Value}");
                 SetProperty(ref mBlocklyWidthRegion, value.Value);
                 Settings.Default.BlocklyWidthRegion = value.Value;
             } 

@@ -11,7 +11,7 @@
     <StatusBar Height="30">
         <StatusBarItem Background="{DynamicResource RegionBrush}">
             <StackPanel>
-                <TextBlock Text="Test status bar element"/>
+                <TextBlock Text="{Binding LogEventContent, Mode=OneWay}"/>
             </StackPanel>
         </StatusBarItem>
     </StatusBar>
