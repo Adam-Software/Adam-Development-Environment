@@ -2,6 +2,7 @@
 using AdamDevelopmentEnvironment.Services.Interfaces.ILoggerDependency;
 using Serilog;
 using Serilog.Events;
+using System;
 
 namespace AdamDevelopmentEnvironment.Services
 {
@@ -19,37 +20,37 @@ namespace AdamDevelopmentEnvironment.Services
 
         public void WriteVerboseLog(string logMessage)
         {
-            LogWriteEvent?.Invoke(logMessage, LogLevel.Verbose);
+            LogWriteEvent?.Invoke(DateTime.Now.ToLocalTime(), logMessage, LogLevel.Verbose);
             Log.Write(LogEventLevel.Verbose, $"{logMessage}");
         }
 
         public void WriteDebugLog(string logMessage)
         {
-            LogWriteEvent?.Invoke(logMessage, LogLevel.Debug);
+            LogWriteEvent?.Invoke(DateTime.Now.ToLocalTime(), logMessage, LogLevel.Debug);
             Log.Write(LogEventLevel.Debug, $"{logMessage}");
         }
 
         public void WriteInformationLog(string logMessage)
         {
-            LogWriteEvent?.Invoke(logMessage, LogLevel.Information);
+            LogWriteEvent?.Invoke(DateTime.Now.ToLocalTime(), logMessage, LogLevel.Information);
             Log.Write(LogEventLevel.Information, $"{logMessage}");
         }
 
         public void WriteWarningLog(string logMessage)
         {
-            LogWriteEvent.Invoke(logMessage, LogLevel.Warning);
+            LogWriteEvent.Invoke(DateTime.Now.ToLocalTime(), logMessage, LogLevel.Warning);
             Log.Write(LogEventLevel.Warning, $"{logMessage}");
         }
 
         public void WriteErrorLog(string logMessage)
         {
-            LogWriteEvent.Invoke(logMessage, LogLevel.Error);
+            LogWriteEvent.Invoke(DateTime.Now.ToLocalTime(), logMessage, LogLevel.Error);
             Log.Write(LogEventLevel.Error, $"{logMessage}");
         }
 
         public void WriteFatalLog(string logMessage)
         {
-            LogWriteEvent.Invoke(logMessage, LogLevel.Fatal);
+            LogWriteEvent.Invoke(DateTime.Now.ToLocalTime(), logMessage, LogLevel.Fatal);
             Log.Write(LogEventLevel.Fatal, $"{logMessage}");
         }
 

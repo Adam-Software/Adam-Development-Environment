@@ -3,7 +3,7 @@ using System;
 
 namespace AdamDevelopmentEnvironment.Services.Interfaces
 {
-    public delegate void LogWriteEventHandler(string logMessage, LogLevel logLevel);
+    public delegate void LogWriteEventHandler(DateTime logDateTime, string logMessage, LogLevel logLevel);
 
     public interface ILoggerService : IDisposable
     {

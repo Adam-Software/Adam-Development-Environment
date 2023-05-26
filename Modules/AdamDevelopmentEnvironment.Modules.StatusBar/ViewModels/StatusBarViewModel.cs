@@ -1,35 +1,43 @@
 ﻿using AdamDevelopmentEnvironment.Core.Mvvm;
 using AdamDevelopmentEnvironment.Services.Interfaces;
 using AdamDevelopmentEnvironment.Services.Interfaces.ILoggerDependency;
+using HandyControl.Tools;
 using Prism.Regions;
+using System;
 
 namespace AdamDevelopmentEnvironment.Modules.StatusBar.ViewModels
 {
     public class StatusBarViewModel : RegionViewModelBase
     {
-        public StatusBarViewModel(IRegionManager regionManager, ILoggerService loggerService) 
-            : base(regionManager, loggerService)
+        private string mLogMessage;
+        private LogLevel? mLogLevel = null;
+
+        public StatusBarViewModel(IRegionManager regionManager, ILoggerService loggerService) : base(regionManager, loggerService)
         {
-            loggerService.LogWriteEvent += LoggerService_LogWriteEvent; 
+            loggerService.LogWriteEvent += LogWriteEvent; 
         }
 
-        private void LoggerService_LogWriteEvent(string logMessage, LogLevel logLevel)
+
+        private void LogWriteEvent(DateTime logDateTime, string logMessage, LogLevel logLevel)
         {
-            // you can filtered level shown message
-            //if(logLevel <= LogLevel.Error)
-            //{
-
-            //}
-
-            LogEventContent = $"{logMessage} is {logLevel} level log";
+            LogLevel = logLevel;
+            LogMessage = $"{logDateTime} {logMessage}";
         }
 
-        private string mLogEventContent;
-        public string LogEventContent
+        #region Logger StatusBar fields
+
+        public string LogMessage
         {
-            get { return mLogEventContent; }
-            set { SetProperty(ref mLogEventContent, value); }
+            get { return mLogMessage; }
+            set { SetProperty(ref mLogMessage, value); }
         }
 
+        public LogLevel? LogLevel
+        {
+            get { return mLogLevel; }
+            set { SetProperty(ref mLogLevel, value); }
+        }
+
+        #endregion
     }
 }

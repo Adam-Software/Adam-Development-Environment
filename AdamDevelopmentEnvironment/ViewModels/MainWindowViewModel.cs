@@ -40,7 +40,7 @@ namespace AdamDevelopmentEnvironment.ViewModels
 
             set
             {
-                LoggerService.WriteInformationLog($"Update {nameof(BlocklyWidthRegion)} with value {value.Value}");
+                LoggerService.WriteDebugLog($"Update {nameof(BlocklyWidthRegion)} with value {value.Value}");
                 SetProperty(ref mBlocklyWidthRegion, value.Value);
                 Settings.Default.BlocklyWidthRegion = value.Value;
             } 
@@ -58,6 +58,7 @@ namespace AdamDevelopmentEnvironment.ViewModels
 
             set
             {
+                LoggerService.WriteDebugLog($"Update {nameof(SourceEditorHeight)} with value {value.Value}");
                 SetProperty(ref mSourceEditorHeight, value.Value);
                 Settings.Default.SourceEditorHeight = value.Value;
             } 
