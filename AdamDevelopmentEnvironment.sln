@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.4.33110.190
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{570AFFB1-A3F6-40E9-B77B-1218C70A0A58}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Modules", "Modules", "{A6FE57D4-A0C3-4445-B045-731DADDC0643}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AdamDevelopmentEnvironment.Modules.Blockly", "Modules\AdamDevelopmentEnvironment.Modules.Blockly\AdamDevelopmentEnvironment.Modules.Blockly.csproj", "{297F2F19-9CFB-42AD-AE41-198EB0C5FE73}"
