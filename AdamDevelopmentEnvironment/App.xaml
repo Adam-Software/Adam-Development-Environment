@@ -10,7 +10,7 @@
                 <hc:ThemeResources/>
                 <hc:Theme/>
                 <!-- Test used theme -->
-                <hc:ThemeResources RequestedTheme="Light" AccentColor="Blue"/>
+                <hc:ThemeResources RequestedTheme="Light" AccentColor="Black"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
         

@@ -5,37 +5,42 @@
              xmlns:local="clr-namespace:AdamDevelopmentEnvironment.Modules.Settings.Views"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             hc:Dialog.Token="SettingsRegionViewToken"             
              mc:Ignorable="d" 
+             
              d:DesignHeight="300" d:DesignWidth="300"
              xmlns:prism="http://prismlibrary.com/"
              prism:ViewModelLocator.AutoWireViewModel="True" >
     
     <hc:DialogContainer>
+        
         <hc:SimpleStackPanel  Width="780"
                               Height="450"  
                               Background="{DynamicResource RegionBrush}">
             
             <!--#region Title Settings window -->
             
-            <DockPanel Background="WhiteSmoke">
+            <DockPanel Background="{DynamicResource MainContentBackgroundBrush}">
 
                 <hc:SimpleText Margin="10 0 0 0"
                                HorizontalAlignment="Left"
                                VerticalAlignment="Center"
                                FontSize="14"
                                FontWeight="Medium"
+                               Foreground="{DynamicResource PrimaryTextBrush}" 
                                Text="{Binding Title}"/>
 
                 <Button Margin="0 4 4 4"
                         Padding="0" 
                         HorizontalAlignment="Right" 
                         VerticalAlignment="Center"
-                        Width="22"
-                        Height="22" 
+                        Width="15"
+                        Height="15" 
                         Command="hc:ControlCommands.Close" 
-                        Style="{StaticResource ButtonIcon}" 
-                        Foreground="{DynamicResource PrimaryBrush}" 
-                        hc:IconElement.Geometry="{StaticResource ErrorGeometry}"/>
+                        CommandParameter="hc:ControlCommands.Close"
+                        Style="{StaticResource ButtonIcon}"
+                        Foreground="{DynamicResource PrimaryBrush}"
+                        hc:IconElement.Geometry="{StaticResource CloseGeometry}"/>
 
             </DockPanel>
             
