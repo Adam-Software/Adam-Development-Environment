@@ -1,6 +1,7 @@
 ﻿
 using AdamDevelopmentEnvironment.Modules.Blockly;
 using AdamDevelopmentEnvironment.Modules.ResultEditor;
+using AdamDevelopmentEnvironment.Modules.Settings;
 using AdamDevelopmentEnvironment.Modules.SourceEditor;
 using AdamDevelopmentEnvironment.Modules.StatusBar;
 using AdamDevelopmentEnvironment.Services;
@@ -55,6 +56,7 @@ namespace AdamDevelopmentEnvironment
             moduleCatalog.AddModule<SourceEditorModule>();
             moduleCatalog.AddModule<ResultEditorModule>();
             moduleCatalog.AddModule<StatusBarModule>();
+            moduleCatalog.AddModule<SettingsModule>();
         }
 
         protected override void OnExit(System.Windows.ExitEventArgs e)

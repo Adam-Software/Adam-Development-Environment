@@ -1,0 +1,47 @@
+﻿<UserControl x:Class="AdamDevelopmentEnvironment.Modules.Settings.Views.SettingsRegionView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:hc="https://handyorg.github.io/handycontrol"
+             xmlns:local="clr-namespace:AdamDevelopmentEnvironment.Modules.Settings.Views"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300"
+             xmlns:prism="http://prismlibrary.com/"
+             prism:ViewModelLocator.AutoWireViewModel="True" >
+    
+    <hc:DialogContainer>
+        <hc:SimpleStackPanel  Width="780"
+                              Height="450"  
+                              Background="{DynamicResource RegionBrush}">
+            
+            <!--#region Title Settings window -->
+            
+            <DockPanel Background="WhiteSmoke">
+
+                <hc:SimpleText Margin="10 0 0 0"
+                               HorizontalAlignment="Left"
+                               VerticalAlignment="Center"
+                               FontSize="14"
+                               FontWeight="Medium"
+                               Text="{Binding Title}"/>
+
+                <Button Margin="0 4 4 4"
+                        Padding="0" 
+                        HorizontalAlignment="Right" 
+                        VerticalAlignment="Center"
+                        Width="22"
+                        Height="22" 
+                        Command="hc:ControlCommands.Close" 
+                        Style="{StaticResource ButtonIcon}" 
+                        Foreground="{DynamicResource PrimaryBrush}" 
+                        hc:IconElement.Geometry="{StaticResource ErrorGeometry}"/>
+
+            </DockPanel>
+            
+            <!--#endregion-->
+
+
+        </hc:SimpleStackPanel>
+    </hc:DialogContainer>
+</UserControl>

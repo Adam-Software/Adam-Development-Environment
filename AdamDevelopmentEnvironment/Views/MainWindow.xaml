@@ -17,11 +17,11 @@
     <hc:BlurWindow.NonClientAreaContent>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
 
-            <!--<Button Name="ButtonConfig" 
+            <Button Name="ButtonConfig" 
                     Style="{StaticResource ButtonIcon}" 
                     Foreground="{DynamicResource PrimaryTextBrush}" 
                     hc:IconElement.Geometry="{StaticResource ConfigGeometry}"
-                    Command="{Binding OpenSettingsWindowCommand}" />-->
+                    Command="{Binding OpenSettingsWindowCommand}" />
 
         </StackPanel>
 
@@ -41,7 +41,14 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        
+
+        <ContentControl Grid.Column="0" 
+                        Grid.Row="1"
+                        Grid.RowSpan="3" 
+                        Grid.ColumnSpan="4"
+                        Visibility="Collapsed"
+                        prism:RegionManager.RegionName="{x:Static core:RegionNames.SettingsRegion}" />
+
         <ContentControl Grid.Row="0"
                         Grid.Column="0"
                         Grid.RowSpan="3"

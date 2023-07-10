@@ -1,5 +1,8 @@
-﻿using AdamDevelopmentEnvironment.Services.Interfaces;
+﻿using AdamDevelopmentEnvironment.Core;
+using AdamDevelopmentEnvironment.Services.Interfaces;
+using Prism.Commands;
 using Prism.Mvvm;
+using Prism.Regions;
 using System.Windows;
 using Settings = AdamDevelopmentEnvironment.Core.Properties.Settings;
 
@@ -7,20 +10,30 @@ namespace AdamDevelopmentEnvironment.ViewModels
 {
     public class MainWindowViewModel : BindableBase
     {
-        public string Title => "Adam Development Environment";
+        public  string Title => "Adam Development Environment";
+        public DelegateCommand OpenSettingsWindowCommand { get; private set; }
 
         private double mBlocklyWidthRegion = Settings.Default.BlocklyWidthRegion;
         private double mSourceEditorHeight = Settings.Default.SourceEditorHeight;
         private ILoggerService LoggerService { get; set; }
+        private IRegionManager RegionManager { get; set; }
 
-        public MainWindowViewModel(ILoggerService loggerService)
+        public MainWindowViewModel(IRegionManager regionManager, ILoggerService loggerService)
         {
+            RegionManager = regionManager;
             LoggerService = loggerService;
+
             LoggerService.WriteInformationLog("Main window loaded");
-            //loggerService.WriteInformationLog("Main window loaded");
+            OpenSettingsWindowCommand = new DelegateCommand(OpenSettingsWindow);
         }
 
-       
+        private void OpenSettingsWindow()
+        {
+            string settingRegionName = RegionNames.SettingsRegion;
+            RegionManager.RequestNavigate(settingRegionName, settingRegionName);   
+        }
+
+
         /// <summary>
         /// The fields determine the position of the splitters relative to the 
         /// left/top element and save it in the settings.

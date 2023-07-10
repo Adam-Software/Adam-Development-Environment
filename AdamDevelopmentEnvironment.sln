@@ -23,6 +23,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AdamDevelopmentEnvironment.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AdamDevelopmentEnvironment.Modules.ResultEditor", "Modules\AdamDevelopmentEnvironment.Modules.ResultEditor\AdamDevelopmentEnvironment.Modules.ResultEditor.csproj", "{992797CA-AD40-4C31-9061-9337E449E43F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdamDevelopmentEnvironment.Modules.Settings", "Modules\AdamDevelopmentEnvironment.Modules.Settings\AdamDevelopmentEnvironment.Modules.Settings.csproj", "{56BFD9A4-3C13-4751-B9A1-88DD06B6BA26}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -61,6 +63,10 @@ Global
 		{992797CA-AD40-4C31-9061-9337E449E43F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{992797CA-AD40-4C31-9061-9337E449E43F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{992797CA-AD40-4C31-9061-9337E449E43F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{56BFD9A4-3C13-4751-B9A1-88DD06B6BA26}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{56BFD9A4-3C13-4751-B9A1-88DD06B6BA26}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{56BFD9A4-3C13-4751-B9A1-88DD06B6BA26}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{56BFD9A4-3C13-4751-B9A1-88DD06B6BA26}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -72,6 +78,7 @@ Global
 		{2127B1A9-9683-45A3-9EAC-F3194FEC36DB} = {A6FE57D4-A0C3-4445-B045-731DADDC0643}
 		{AD8FC279-F816-4B46-8F1D-1119EDD853D6} = {A6FE57D4-A0C3-4445-B045-731DADDC0643}
 		{992797CA-AD40-4C31-9061-9337E449E43F} = {A6FE57D4-A0C3-4445-B045-731DADDC0643}
+		{56BFD9A4-3C13-4751-B9A1-88DD06B6BA26} = {A6FE57D4-A0C3-4445-B045-731DADDC0643}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {6B2DABF1-FF21-421A-84DC-8D695F0EB1CA}
