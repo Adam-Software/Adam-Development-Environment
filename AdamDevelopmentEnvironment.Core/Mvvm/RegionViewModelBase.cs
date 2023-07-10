@@ -7,12 +7,12 @@ namespace AdamDevelopmentEnvironment.Core.Mvvm
     public class RegionViewModelBase : ViewModelBase, INavigationAware, IConfirmNavigationRequest
     {
         protected IRegionManager RegionManager { get; private set; }
-        protected ILoggerService LoggerSevice { get; private set; }
+        protected ILoggerService LoggerService { get; private set; }
 
         public RegionViewModelBase(IRegionManager regionManager, ILoggerService loggerService)
         {
             RegionManager = regionManager;
-            LoggerSevice = loggerService;
+            LoggerService = loggerService;
         }
 
         public virtual void ConfirmNavigationRequest(NavigationContext navigationContext, Action<bool> continuationCallback)

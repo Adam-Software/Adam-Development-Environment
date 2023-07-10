@@ -46,5 +46,17 @@ namespace AdamDevelopmentEnvironment.Core.Properties {
                 this["SourceEditorHeight"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("2")]
+        public int DisplayLogFromLevel {
+            get {
+                return ((int)(this["DisplayLogFromLevel"]));
+            }
+            set {
+                this["DisplayLogFromLevel"] = value;
+            }
+        }
     }
 }

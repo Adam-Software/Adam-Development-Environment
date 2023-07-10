@@ -1,11 +1,8 @@
 ﻿using AdamDevelopmentEnvironment.Core.Mvvm;
 using AdamDevelopmentEnvironment.Modules.Settings.Views;
 using AdamDevelopmentEnvironment.Services.Interfaces;
+using AdamDevelopmentEnvironment.Services.Interfaces.ILoggerDependency;
 using HandyControl.Controls;
-using HandyControl.Interactivity;
-using HandyControl.Tools;
-using HandyControl.Tools.Extension;
-using Prism.Commands;
 using Prism.Regions;
 using System;
 using System.Windows;
@@ -14,12 +11,10 @@ namespace AdamDevelopmentEnvironment.Modules.Settings.ViewModels
 {
     public class SettingsRegionViewModel : RegionViewModelBase
     {
-        public DelegateCommand CloseSettingsWindowCommand { get; private set; }
-        public bool IsVisible = false;
-        
+        private bool IsVisible = false;
         public SettingsRegionViewModel(IRegionManager regionManager, ILoggerService loggerService) : base(regionManager, loggerService)
         {
-           
+            
         }
 
         public override void ConfirmNavigationRequest(NavigationContext navigationContext, Action<bool> continuationCallback)
@@ -27,8 +22,9 @@ namespace AdamDevelopmentEnvironment.Modules.Settings.ViewModels
             if (IsVisible)
                 return;
 
-            Dialog dialog = Dialog.Show<SettingsRegionView>();
+            LoggerService.WriteInformationLog("Open settings window");
 
+            Dialog dialog = Dialog.Show<SettingsRegionView>();
             IsVisible = dialog.IsVisible;
             dialog.Unloaded += DialogUnloaded;
         }
@@ -36,6 +32,18 @@ namespace AdamDevelopmentEnvironment.Modules.Settings.ViewModels
         private void DialogUnloaded(object sender, RoutedEventArgs e)
         {
             IsVisible = false;
+            LoggerService.WriteInformationLog("Close settings window");
         }
+
+        #region LogLevelCollection collection
+
+        private Array mLogLevelCollection = Enum.GetValues(typeof(LogLevel));
+        public Array LogLevelCollection
+        {
+            get { return mLogLevelCollection; }
+            set { SetProperty(ref mLogLevelCollection, value); }
+        }
+
+        #endregion
     }
 }

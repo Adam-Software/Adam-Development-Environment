@@ -3,23 +3,27 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:hc="https://handyorg.github.io/handycontrol"
              xmlns:local="clr-namespace:AdamDevelopmentEnvironment.Modules.Settings.Views"
+             xmlns:converter="clr-namespace:AdamDevelopmentEnvironment.Core.WpfConverters;assembly=AdamDevelopmentEnvironment.Core"
+             xmlns:properties="clr-namespace:AdamDevelopmentEnvironment.Core.Properties;assembly=AdamDevelopmentEnvironment.Core"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             hc:Dialog.Token="SettingsRegionViewToken"             
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"           
              mc:Ignorable="d" 
-             
-             d:DesignHeight="300" d:DesignWidth="300"
              xmlns:prism="http://prismlibrary.com/"
              prism:ViewModelLocator.AutoWireViewModel="True" >
+
+
+    <UserControl.Resources>
+        <converter:IntToLogLevelValue x:Key="IntToLogLevelValue"/>
+    </UserControl.Resources>
     
     <hc:DialogContainer>
-        
+
         <hc:SimpleStackPanel  Width="780"
                               Height="450"  
                               Background="{DynamicResource RegionBrush}">
-            
+
             <!--#region Title Settings window -->
-            
+
             <DockPanel Background="{DynamicResource MainContentBackgroundBrush}">
 
                 <hc:SimpleText Margin="10 0 0 0"
@@ -43,10 +47,67 @@
                         hc:IconElement.Geometry="{StaticResource CloseGeometry}"/>
 
             </DockPanel>
-            
+
             <!--#endregion-->
 
+            <hc:TabControl Width="Auto" Height="420"
+                           IsAnimationEnabled="True" 
+                           ShowCloseButton="False" 
+                           IsDraggable="False" 
+                           IsTabFillEnabled="False">
 
+                <!-- #region Tab View Settings -->
+
+                <hc:TabItem Header="Вид" IsSelected="True">
+
+                    <Grid Background="{DynamicResource RegionBrush}">
+
+                        <Grid.RowDefinitions>
+                            <!--0-->
+                            <RowDefinition Height="Auto"/>
+                            <!--1-->
+                            <RowDefinition Height="Auto"/>
+                            <!--2-->
+                            <RowDefinition Height="Auto"/>
+
+                        </Grid.RowDefinitions>
+
+                        <hc:SimpleStackPanel Grid.Row="0"
+                                             Margin="0 5 0 0"
+                                             Orientation="Horizontal"
+                                             HorizontalAlignment="Center">
+
+                            <Border BorderBrush="Black"
+                                    BorderThickness="1"
+                                    Margin="10"
+                                    Padding="10"
+                                    Style="{StaticResource BorderTipBaseStyle}">
+
+                                <hc:SimpleStackPanel Orientation="Vertical"
+                                                 HorizontalAlignment="Left">
+                                    <TextBlock Margin="0 0 0 10"
+                                               Text="Настройки статус бара" 
+                                               FontWeight="Bold"
+                                               TextWrapping="Wrap"/>
+
+                                    <ComboBox  Width="215"
+                                               HorizontalContentAlignment="Left"
+                                               ItemsSource="{Binding LogLevelCollection}" 
+                                               SelectedItem="{Binding DisplayLogFromLevel, Mode=TwoWay, 
+                                                    Converter={StaticResource IntToLogLevelValue}, 
+                                                    Source={x:Static properties:Settings.Default}}"
+                                               Style="{DynamicResource ComboBoxExtend}"
+                                               hc:InfoElement.TitlePlacement="Top" 
+                                               hc:InfoElement.Title="Показывать логи с уровня"/>
+
+
+                                </hc:SimpleStackPanel>
+                            </Border>
+                        </hc:SimpleStackPanel>
+                        
+                    </Grid>
+                </hc:TabItem>
+            </hc:TabControl>
         </hc:SimpleStackPanel>
     </hc:DialogContainer>
 </UserControl>

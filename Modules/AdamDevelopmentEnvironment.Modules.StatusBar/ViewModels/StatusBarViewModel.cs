@@ -1,7 +1,7 @@
 ﻿using AdamDevelopmentEnvironment.Core.Mvvm;
+using AdamDevelopmentEnvironment.Core.Properties;
 using AdamDevelopmentEnvironment.Services.Interfaces;
 using AdamDevelopmentEnvironment.Services.Interfaces.ILoggerDependency;
-using HandyControl.Tools;
 using Prism.Regions;
 using System;
 
@@ -14,15 +14,23 @@ namespace AdamDevelopmentEnvironment.Modules.StatusBar.ViewModels
 
         public StatusBarViewModel(IRegionManager regionManager, ILoggerService loggerService) : base(regionManager, loggerService)
         {
-            loggerService.LogWriteEvent += LogWriteEvent; 
+            LoggerService.LogWriteEvent += LogWriteEvent; 
         }
 
+        #region Logger Event
 
         private void LogWriteEvent(DateTime logDateTime, string logMessage, LogLevel logLevel)
         {
-            LogLevel = logLevel;
-            LogMessage = $"{logDateTime} {logMessage}";
+            int displayFromLevel = Settings.Default.DisplayLogFromLevel;
+
+            if (((int)logLevel) >= displayFromLevel)
+            {
+                LogLevel = logLevel;
+                LogMessage = $"{logDateTime} {logMessage}";
+            }
         }
+
+        #endregion
 
         #region Logger StatusBar fields
 
