@@ -2,6 +2,8 @@
 using AdamDevelopmentEnvironment.Services;
 using AdamDevelopmentEnvironment.Services.Interfaces;
 using AdamDevelopmentEnvironment.Views;
+using HandyControl.Controls;
+using HandyControl.Data;
 using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Regions;
@@ -23,6 +25,7 @@ namespace AdamDevelopmentEnvironment.ViewModels
         private IRegionManager RegionManager { get; }
         private ITcpClientService TcpClientService { get; }
 
+        
         public MainWindowViewModel(IRegionManager regionManager, ILoggerService loggerService, ITcpClientService tcpClientService)
         {
             RegionManager = regionManager;
@@ -36,8 +39,10 @@ namespace AdamDevelopmentEnvironment.ViewModels
 
             Application.Current.MainWindow.Loaded += MainWindowLoaded;
             Application.Current.MainWindow.Closed += MainWindowClosed;
-        }
 
+            Application.Current.MainWindow.Activated += MainWindow_Activated;
+            Application.Current.MainWindow.Deactivated += MainWindow_Deactivated; ;
+        }
 
         #region MainWindow event
 
@@ -52,11 +57,35 @@ namespace AdamDevelopmentEnvironment.ViewModels
             TcpClientService.Dispose();
         }
 
+        private void MainWindow_Deactivated(object sender, EventArgs e)
+        {
+          
+        }
+
+        private void MainWindow_Activated(object sender, EventArgs e)
+        {
+            
+        }
+
         #endregion 
+
         private void OpenSettingsWindow()
         {
             string settingRegionName = RegionNames.SettingsRegion;
-            RegionManager.RequestNavigate(settingRegionName, settingRegionName);   
+            RegionManager.RequestNavigate(settingRegionName, settingRegionName);
+
+            Growl.Success("File saved successfully!", "SuccessMsg");
+            /*Growl.Warning(new GrowlInfo
+            {
+                Message = "GrowlWarning",
+                CancelStr = "Ignore",
+
+                ActionBeforeClose = isConfirmed =>
+                {
+                    Growl.InfoGlobal(isConfirmed.ToString());
+                    return true;
+                }
+            });*/
         }
 
 

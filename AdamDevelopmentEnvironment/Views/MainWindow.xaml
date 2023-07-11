@@ -43,12 +43,26 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
+        <!--region settings window -->
+        
         <ContentControl Grid.Column="0" 
                         Grid.Row="1"
                         Grid.RowSpan="3" 
                         Grid.ColumnSpan="4"
                         Visibility="Collapsed"
                         prism:RegionManager.RegionName="{x:Static core:RegionNames.SettingsRegion}" />
+        
+        <!--#endregion-->
+
+        <ScrollViewer Grid.Column="2"
+                      Grid.Row="0"
+                      Grid.RowSpan="3"  
+                      VerticalScrollBarVisibility="Hidden" 
+                      HorizontalAlignment="Left">
+
+            <StackPanel hc:Growl.Token="SuccessMsg" VerticalAlignment="Top" Margin="0,10,10,10"/>
+            
+        </ScrollViewer>
 
         <ContentControl Grid.Row="0"
                         Grid.Column="0"
@@ -57,6 +71,7 @@
 
 
         <!-- Vertical splitter -->
+        
         <GridSplitter Grid.Column="1" Grid.Row="0" Grid.RowSpan="3" Background="{DynamicResource RegionBrush}"
                       Width="3" VerticalAlignment="Stretch" HorizontalAlignment="Center"/>
 
