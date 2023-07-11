@@ -48,6 +48,7 @@ namespace AdamDevelopmentEnvironment
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
             containerRegistry.RegisterSingleton<ILoggerService>(()=> LoggerService);
+            containerRegistry.RegisterSingleton<ITcpClientService>(() => new TcpClientService(LoggerService));
         }
 
         protected override void ConfigureModuleCatalog(IModuleCatalog moduleCatalog)
@@ -82,6 +83,7 @@ namespace AdamDevelopmentEnvironment
         private void OnPropertyChange(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
             Settings.Default.Save();
+            LoggerService.WriteInformationLog("Settings change and save");
         }
     }
 }

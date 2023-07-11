@@ -38,19 +38,19 @@ namespace AdamDevelopmentEnvironment.Services
 
         public void WriteWarningLog(string logMessage)
         {
-            LogWriteEvent.Invoke(DateTime.Now.ToLocalTime(), logMessage, LogLevel.Warning);
+            LogWriteEvent?.Invoke(DateTime.Now.ToLocalTime(), logMessage, LogLevel.Warning);
             Log.Write(LogEventLevel.Warning, $"{logMessage}");
         }
 
         public void WriteErrorLog(string logMessage)
         {
-            LogWriteEvent.Invoke(DateTime.Now.ToLocalTime(), logMessage, LogLevel.Error);
+            LogWriteEvent?.Invoke(DateTime.Now.ToLocalTime(), logMessage, LogLevel.Error);
             Log.Write(LogEventLevel.Error, $"{logMessage}");
         }
 
         public void WriteFatalLog(string logMessage)
         {
-            LogWriteEvent.Invoke(DateTime.Now.ToLocalTime(), logMessage, LogLevel.Fatal);
+            LogWriteEvent?.Invoke(DateTime.Now.ToLocalTime(), logMessage, LogLevel.Fatal);
             Log.Write(LogEventLevel.Fatal, $"{logMessage}");
         }
 

@@ -1,8 +1,12 @@
 ﻿using AdamDevelopmentEnvironment.Core;
+using AdamDevelopmentEnvironment.Services;
 using AdamDevelopmentEnvironment.Services.Interfaces;
+using AdamDevelopmentEnvironment.Views;
 using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Regions;
+using System;
+using System.Threading.Tasks;
 using System.Windows;
 using Settings = AdamDevelopmentEnvironment.Core.Properties.Settings;
 
@@ -15,18 +19,40 @@ namespace AdamDevelopmentEnvironment.ViewModels
 
         private double mBlocklyWidthRegion = Settings.Default.BlocklyWidthRegion;
         private double mSourceEditorHeight = Settings.Default.SourceEditorHeight;
-        private ILoggerService LoggerService { get; set; }
-        private IRegionManager RegionManager { get; set; }
+        private ILoggerService LoggerService { get; }
+        private IRegionManager RegionManager { get; }
+        private ITcpClientService TcpClientService { get; }
 
-        public MainWindowViewModel(IRegionManager regionManager, ILoggerService loggerService)
+        public MainWindowViewModel(IRegionManager regionManager, ILoggerService loggerService, ITcpClientService tcpClientService)
         {
             RegionManager = regionManager;
             LoggerService = loggerService;
+            TcpClientService = tcpClientService;
 
             LoggerService.WriteInformationLog("Main window loaded");
             OpenSettingsWindowCommand = new DelegateCommand(OpenSettingsWindow);
+
+            tcpClientService.ConnectAsync().Await();
+
+            Application.Current.MainWindow.Loaded += MainWindowLoaded;
+            Application.Current.MainWindow.Closed += MainWindowClosed;
         }
 
+
+        #region MainWindow event
+
+        private void MainWindowLoaded(object sender, RoutedEventArgs e)
+        {
+            //Test connect, so that the log has time to be displayed on the status bar
+            TcpClientService.ConnectAsync();
+        }
+
+        private void MainWindowClosed(object sender, EventArgs e)
+        {
+            TcpClientService.Dispose();
+        }
+
+        #endregion 
         private void OpenSettingsWindow()
         {
             string settingRegionName = RegionNames.SettingsRegion;

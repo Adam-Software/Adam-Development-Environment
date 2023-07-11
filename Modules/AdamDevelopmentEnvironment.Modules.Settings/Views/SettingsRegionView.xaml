@@ -41,7 +41,6 @@
                         Width="15"
                         Height="15" 
                         Command="hc:ControlCommands.Close" 
-                        CommandParameter="hc:ControlCommands.Close"
                         Style="{StaticResource ButtonIcon}"
                         Foreground="{DynamicResource PrimaryBrush}"
                         hc:IconElement.Geometry="{StaticResource CloseGeometry}"/>

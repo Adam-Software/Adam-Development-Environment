@@ -11,6 +11,8 @@ namespace AdamDevelopmentEnvironment.Modules.Settings.ViewModels
 {
     public class SettingsRegionViewModel : RegionViewModelBase
     {
+        public string Title => "Настройки приложения";
+
         private bool IsVisible = false;
         public SettingsRegionViewModel(IRegionManager regionManager, ILoggerService loggerService) : base(regionManager, loggerService)
         {
