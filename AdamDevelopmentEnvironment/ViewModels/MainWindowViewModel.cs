@@ -74,7 +74,7 @@ namespace AdamDevelopmentEnvironment.ViewModels
             string settingRegionName = RegionNames.SettingsRegion;
             RegionManager.RequestNavigate(settingRegionName, settingRegionName);
 
-            Growl.Success("File saved successfully!", "SuccessMsg");
+            
             /*Growl.Warning(new GrowlInfo
             {
                 Message = "GrowlWarning",

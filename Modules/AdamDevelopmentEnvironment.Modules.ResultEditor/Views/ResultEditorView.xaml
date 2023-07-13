@@ -10,7 +10,11 @@
 
     <hc:Watermark Mark="ResultEditorRegion">
         <Grid Background="{DynamicResource BackgroundBrush}">
-            
+            <StackPanel>
+                <Button Content="Show info" Command="{Binding TestCommand}"/>
+                <Button Content="Show Error" Command="{Binding TestCommand2}"/>
+            </StackPanel>
+
         </Grid>
     </hc:Watermark>
 </UserControl>
