@@ -7,5 +7,6 @@
         public const string ResultsEditorRegion = "ResultsEditorRegion";
         public const string StatusBarRegion = "StatusBarRegion";
         public const string SettingsRegion = "SettingsRegion";
+        public const string NotifyBar = "NotifyBar";
     }
 }

@@ -6,8 +6,7 @@ namespace AdamDevelopmentEnvironment.Modules.Blockly.ViewModels
 {
     public class BlocklyViewModel : RegionViewModelBase
     {
-        public BlocklyViewModel(IRegionManager regionManager, ILoggerService loggerService) 
-            : base(regionManager, loggerService)
+        public BlocklyViewModel(IRegionManager regionManager, ILoggerService loggerService) : base(regionManager, loggerService)
         {
             
         }
@@ -16,5 +15,7 @@ namespace AdamDevelopmentEnvironment.Modules.Blockly.ViewModels
         {
      
         }
+
+
     }
 }

@@ -9,16 +9,6 @@
              prism:ViewModelLocator.AutoWireViewModel="True">
 
     <Grid Background="{DynamicResource BackgroundBrush}">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-        </Grid.RowDefinitions>
-        
-        <StackPanel hc:Growl.GrowlParent="True" hc:Growl.Token="AllMessage"/>
-            
-            
-
-
-
 
     </Grid>
     

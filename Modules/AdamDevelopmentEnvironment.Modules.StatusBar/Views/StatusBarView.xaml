@@ -18,6 +18,7 @@
     <StatusBar>
         <StatusBarItem Background="{DynamicResource RegionBrush}">
             <StackPanel Orientation="Horizontal">
+                
                 <Path Margin="0 0 5 0" 
                           Width="14" 
                           Height="14"
@@ -31,6 +32,10 @@
 
                 <TextBlock Text="{Binding LogMessage, Mode=OneWay}" 
                            Style="{StaticResource TextBlockDefaultBold}" />
+
+                <Button hc:IconElement.Geometry="{StaticResource DragHorizontalGeometry}"
+                        Style="{StaticResource   ButtonIcon}"
+                        Command="{Binding ApplicationCommands.ExpandNotifyBarCommand }"/>
             </StackPanel>
         </StatusBarItem>
     </StatusBar>

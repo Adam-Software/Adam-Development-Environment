@@ -5,6 +5,8 @@ namespace AdamDevelopmentEnvironment.Core.Mvvm
 {
     public abstract class ViewModelBase : BindableBase, IDestructible
     {
+
+
         protected ViewModelBase()
         {
 
@@ -14,5 +16,7 @@ namespace AdamDevelopmentEnvironment.Core.Mvvm
         {
 
         }
+
+
     }
 }

@@ -1,5 +1,7 @@
 ﻿
+using AdamDevelopmentEnvironment.Core.Commands;
 using AdamDevelopmentEnvironment.Modules.Blockly;
+using AdamDevelopmentEnvironment.Modules.NotifyBar;
 using AdamDevelopmentEnvironment.Modules.ResultEditor;
 using AdamDevelopmentEnvironment.Modules.Settings;
 using AdamDevelopmentEnvironment.Modules.SourceEditor;
@@ -49,6 +51,8 @@ namespace AdamDevelopmentEnvironment
         {
             containerRegistry.RegisterSingleton<ILoggerService>(()=> LoggerService);
             containerRegistry.RegisterSingleton<ITcpClientService>(() => new TcpClientService(LoggerService));
+
+            containerRegistry.RegisterSingleton<IApplicationCommands>(() => new ApplicationCommands());
         }
 
         protected override void ConfigureModuleCatalog(IModuleCatalog moduleCatalog)
@@ -58,6 +62,7 @@ namespace AdamDevelopmentEnvironment
             moduleCatalog.AddModule<ResultEditorModule>();
             moduleCatalog.AddModule<StatusBarModule>();
             moduleCatalog.AddModule<SettingsModule>();
+            moduleCatalog.AddModule<NotifyBarModule>();
         }
 
         protected override void OnExit(System.Windows.ExitEventArgs e)

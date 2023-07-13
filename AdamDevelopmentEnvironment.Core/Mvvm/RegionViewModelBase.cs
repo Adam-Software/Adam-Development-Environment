@@ -15,6 +15,8 @@ namespace AdamDevelopmentEnvironment.Core.Mvvm
             LoggerService = loggerService;
         }
 
+        #region Navigation
+
         public virtual void ConfirmNavigationRequest(NavigationContext navigationContext, Action<bool> continuationCallback)
         {
             continuationCallback(true);
@@ -34,5 +36,7 @@ namespace AdamDevelopmentEnvironment.Core.Mvvm
         {
             
         }
+
+        #endregion
     }
 }

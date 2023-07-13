@@ -1,27 +1,28 @@
 ﻿using AdamDevelopmentEnvironment.Core;
-using AdamDevelopmentEnvironment.Modules.ResultEditor.Views;
+using AdamDevelopmentEnvironment.Modules.NotifyBar.Views;
 using Prism.Ioc;
 using Prism.Modularity;
 using Prism.Regions;
 
-namespace AdamDevelopmentEnvironment.Modules.ResultEditor
+namespace AdamDevelopmentEnvironment.Modules.NotifyBar
 {
-    public class ResultEditorModule : IModule
+    public class NotifyBarModule : IModule
     {
         private readonly IRegionManager mRegionManager;
-        public ResultEditorModule(IRegionManager regionManager)
+
+        public NotifyBarModule(IRegionManager regionManager)
         {
             mRegionManager = regionManager;
         }
 
         public void OnInitialized(IContainerProvider containerProvider)
         {
-            mRegionManager.RequestNavigate(RegionNames.ResultsEditorRegion, nameof(ResultEditorView));
+            mRegionManager.RequestNavigate(RegionNames.NotifyBar, nameof(NotifyBarView));
         }
 
         public void RegisterTypes(IContainerRegistry containerRegistry)
         {
-            containerRegistry.RegisterForNavigation<ResultEditorView>();
+            containerRegistry.RegisterForNavigation<NotifyBarView>();
         }
     }
 }

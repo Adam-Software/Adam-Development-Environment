@@ -21,6 +21,7 @@
   <ItemGroup>
     <ProjectReference Include="..\AdamDevelopmentEnvironment.Core\AdamDevelopmentEnvironment.Core.csproj" />
     <ProjectReference Include="..\Modules\AdamDevelopmentEnvironment.Modules.Blockly\AdamDevelopmentEnvironment.Modules.Blockly.csproj" />
+    <ProjectReference Include="..\Modules\AdamDevelopmentEnvironment.Modules.NotifyBar\AdamDevelopmentEnvironment.Modules.NotifyBar.csproj" />
     <ProjectReference Include="..\Modules\AdamDevelopmentEnvironment.Modules.ResultEditor\AdamDevelopmentEnvironment.Modules.ResultEditor.csproj" />
     <ProjectReference Include="..\Modules\AdamDevelopmentEnvironment.Modules.Settings\AdamDevelopmentEnvironment.Modules.Settings.csproj" />
     <ProjectReference Include="..\Modules\AdamDevelopmentEnvironment.Modules.SourceEditor\AdamDevelopmentEnvironment.Modules.SourceEditor.csproj" />

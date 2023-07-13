@@ -55,6 +55,11 @@
         
         <!--#endregion-->
 
+        <ContentControl Grid.Row="0"
+                        Grid.Column="3"
+                        Grid.RowSpan="3"
+                        prism:RegionManager.RegionName="{x:Static core:RegionNames.NotifyBar}"/>
+
         <!--<ScrollViewer Grid.Column="3"
                       Grid.Row="0"
                       Grid.RowSpan="2"
@@ -98,7 +103,7 @@
 
         <ContentControl Grid.Row="3"
                         Grid.Column="0"
-                        Grid.ColumnSpan="3"
+                        Grid.ColumnSpan="4"
                         prism:RegionManager.RegionName="{x:Static core:RegionNames.StatusBarRegion}"/>
 
     </Grid>
