@@ -30,6 +30,7 @@ namespace AdamDevelopmentEnvironment.Modules.NotifyBar.ViewModels
         }
 
         #region Manipulate NotifyBar
+
         private void ExpandNotifyBar()
         {
             switch (NotifyBarIsExpanded)
@@ -48,7 +49,10 @@ namespace AdamDevelopmentEnvironment.Modules.NotifyBar.ViewModels
             get { return mNotifyBarIsExpanded; }
             set 
             {
-                Growls.NotifyBarIsExpanded = value;
+                if (value == true)
+                    Growls.ClearClobalGrowls();
+
+                Growls.NotShowClobalGrowl = value;
                 SetProperty(ref mNotifyBarIsExpanded, value); 
             }
         }

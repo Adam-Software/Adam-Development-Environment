@@ -54,7 +54,31 @@
                     hc:IconElement.Height="16"
                     hc:IconElement.Width="16"
                     Style="{StaticResource  ButtonIcon}"
-                    Command="{Binding ApplicationCommands.ExpandNotifyBarCommand }"/>
+                    Command="{Binding ApplicationCommands.ExpandNotifyBarCommand }">
+                
+                <Button.ContextMenu>
+                    <ContextMenu StaysOpen="true" 
+                                 Style="{DynamicResource ContextMenu.Small}">
+                        <MenuItem Header="Очистить все"
+                                  IsCheckable="False"
+                                  hc:IconElement.Geometry="{DynamicResource AddGeometry}"
+                                  hc:IconElement.Height="16"
+                                  hc:IconElement.Width="16"/>
+                        <MenuItem Header="Показывать уведомления"
+                                  IsCheckable="False">
+                            <MenuItem Header="Все"
+                                      IsCheckable="True"
+                                      IsChecked="True"/>
+                            <MenuItem Header="Только важные"
+                                      IsCheckable="True"
+                                      IsChecked="False"/>
+                            <MenuItem Header="Никаких"
+                                      IsCheckable="True"
+                                      IsChecked="False"/>
+                        </MenuItem>
+                    </ContextMenu>
+                </Button.ContextMenu>
+            </Button>
         </StatusBarItem>
 
 

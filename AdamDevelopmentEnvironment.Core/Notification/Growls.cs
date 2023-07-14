@@ -19,7 +19,7 @@ namespace AdamDevelopmentEnvironment.Core.Notification
 
             Growl.Error(gf);
 
-            if (NotifyBarIsExpanded)
+            if (NotShowClobalGrowl)
                 return;
 
             gf.StaysOpen = false;
@@ -41,7 +41,7 @@ namespace AdamDevelopmentEnvironment.Core.Notification
 
             Growl.Info(gf);
 
-            if (NotifyBarIsExpanded)
+            if (NotShowClobalGrowl)
                 return;
 
             gf.StaysOpen = false;
@@ -54,6 +54,14 @@ namespace AdamDevelopmentEnvironment.Core.Notification
             Growl.Clear("GrowlToNotifyBar");
         }
 
-        public static bool NotifyBarIsExpanded { get; set; } = false;
+        public static void ClearClobalGrowls()
+        {
+            Growl.ClearGlobal();
+        }
+
+        /// <summary>
+        /// If true don`t show Global grawl
+        /// </summary>
+        public static bool NotShowClobalGrowl { get; set; } = false;
     }
 }
