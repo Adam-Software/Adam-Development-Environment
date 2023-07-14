@@ -8,13 +8,13 @@
              xmlns:hc="https://handyorg.github.io/handycontrol"
              prism:ViewModelLocator.AutoWireViewModel="True">
 
-    <hc:Watermark Mark="ResultEditorRegion">
-        <Grid Background="{DynamicResource BackgroundBrush}">
-            <StackPanel>
-                <Button Content="Show info" Command="{Binding TestCommand}"/>
-                <Button Content="Show Error" Command="{Binding TestCommand2}"/>
-            </StackPanel>
 
-        </Grid>
-    </hc:Watermark>
+    <Grid Background="{DynamicResource BackgroundBrush}">
+        <DockPanel  VerticalAlignment="Top" Margin="0" Background="{StaticResource   MainContentBackgroundBrush}" LastChildFill="False">
+            <Button Content="Show info" Margin="5" Command="{Binding TestCommand}" DockPanel.Dock="Left"/>
+            <Button Content="Show Error" Margin="5" Command="{Binding TestCommand2}" DockPanel.Dock="Left"  />
+            
+        </DockPanel>
+    </Grid>
+
 </UserControl>

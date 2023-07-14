@@ -1,4 +1,5 @@
 ﻿using AdamDevelopmentEnvironment.Core.Mvvm;
+using AdamDevelopmentEnvironment.Core.Notification;
 using AdamDevelopmentEnvironment.Services.Interfaces;
 using HandyControl.Controls;
 using HandyControl.Data;
@@ -23,30 +24,12 @@ namespace AdamDevelopmentEnvironment.Modules.ResultEditor.ViewModels
 
         private void Test()
         {
-            Growl.Success("File saved successfully!", "GrowlMessage");
+            Growls.InformationGrowls("Growl information happened");
         }
 
         private void Test2()
         {
-            GrowlInfo gf = new()
-            {
-                Message = "On no! error",
-                StaysOpen = true,
-                IsCustom = true,
-                ShowCloseButton = true,
-                WaitTime = 3
-
-
-                /*ActionBeforeClose = isConfirmed =>
-                {
-                    Growl.InfoGlobal(isConfirmed.ToString());
-                    return true;
-                }*/
-            };
-            Growl.Error(gf);
-
-            gf.StaysOpen = false;
-            Growl.ErrorGlobal(gf);
+            Growls.ErrorGrowls("Growl error happened");
         }
     }
 }

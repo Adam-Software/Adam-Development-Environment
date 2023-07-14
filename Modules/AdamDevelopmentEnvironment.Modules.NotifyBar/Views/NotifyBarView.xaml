@@ -9,13 +9,33 @@
              xmlns:prism="http://prismlibrary.com/"
              prism:ViewModelLocator.AutoWireViewModel="True" >
 
-    <Expander ExpandDirection="Right" Visibility="Visible" 
-              IsExpanded="{Binding NotifyBarIsExpanded, Mode=TwoWay}">
-        
+
+
+    <Expander Grid.Column="1" ExpandDirection="Right" Visibility="Visible"
+              IsExpanded="{Binding NotifyBarIsExpanded, Mode=TwoWay}" 
+              Style="{DynamicResource Expander.Small}">
+
+        <Expander.Header>
+            <Grid Width="Auto" Height="Auto" >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Grid.Column="0" />
+                <TextBlock Grid.Column="1" Text="Уведомления" />
+
+            </Grid>
+        </Expander.Header>
+
+
         <StackPanel Width="Auto" Height="Auto" 
                     Background="{DynamicResource BackgroundBrush}"
-                    hc:Growl.Token="GrowlMessage"/>
+                    hc:Growl.Token="GrowlToNotifyBar"/>
+
     </Expander>
-    
-    
+
+
+
+
 </UserControl>

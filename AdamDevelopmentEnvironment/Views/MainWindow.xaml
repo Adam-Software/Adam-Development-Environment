@@ -15,7 +15,7 @@
     <!--#region NonClientAreaContent -->
     
     <hc:BlurWindow.NonClientAreaContent>
-        
+
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
 
             <Button Name="ButtonConfig" 
@@ -54,46 +54,35 @@
                         prism:RegionManager.RegionName="{x:Static core:RegionNames.SettingsRegion}" />
         
         <!--#endregion-->
+        
+        <!--#region notify bar -->
 
-        <ContentControl Grid.Row="0"
-                        Grid.Column="3"
-                        Grid.RowSpan="3"
-                        prism:RegionManager.RegionName="{x:Static core:RegionNames.NotifyBar}"/>
+        <ContentControl  Grid.Row="0"
+                     Grid.Column="3"
+                     Grid.RowSpan="3"
+                     Grid.ColumnSpan="4" 
+                     prism:RegionManager.RegionName="{x:Static core:RegionNames.NotifyBar}"/>
 
-        <!--<ScrollViewer Grid.Column="3"
-                      Grid.Row="0"
-                      Grid.RowSpan="2"
-                      VerticalScrollBarVisibility="Hidden" 
-                      HorizontalAlignment="Right"
-                      Background="Beige"
-                      Foreground="Transparent">-->
-
-            <!--<StackPanel Grid.Column="3"
-                        Grid.Row="0"
-                        Grid.RowSpan="2"
-                        hc:Growl.Token="SuccessMsg"
-                        Width="Auto"
-                        VerticalAlignment="Top" 
-                        Margin="0"/>-->
-
-        <!--</ScrollViewer>-->
+        <!--#endregion-->
 
         <ContentControl Grid.Row="0"
                         Grid.Column="0"
-                        Grid.RowSpan="3"
+                        Grid.RowSpan="3"            
                         prism:RegionManager.RegionName="{x:Static core:RegionNames.BlocklyRegion}"/>
-
 
         <!-- Vertical splitter -->
         
-        <GridSplitter Grid.Column="1" Grid.Row="0" Grid.RowSpan="3" Background="{DynamicResource RegionBrush}"
+        <GridSplitter Grid.Column="1" Grid.Row="0" Grid.RowSpan="3" 
+                      Background="{DynamicResource RegionBrush}"
                       Width="3" VerticalAlignment="Stretch" HorizontalAlignment="Center"/>
 
-        <ContentControl Grid.Row="0"
-                        Grid.Column="2"
-                        prism:RegionManager.RegionName="{x:Static core:RegionNames.SourceEditorRegion}"/>
+
+            <ContentControl Grid.Row="0"
+                            Grid.Column="2"  
+                            prism:RegionManager.RegionName="{x:Static core:RegionNames.SourceEditorRegion}"/>
 
         <!-- Horizontal splitter -->
+        
         <GridSplitter Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2" Background="{DynamicResource RegionBrush}"
                       Height="3" HorizontalAlignment="Stretch" VerticalAlignment="Center"/>
 
