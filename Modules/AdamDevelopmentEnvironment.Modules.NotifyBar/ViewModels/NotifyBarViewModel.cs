@@ -1,5 +1,6 @@
 ﻿using AdamDevelopmentEnvironment.Core.Commands;
 using AdamDevelopmentEnvironment.Core.Mvvm;
+using AdamDevelopmentEnvironment.Core.Notification;
 using AdamDevelopmentEnvironment.Services.Interfaces;
 using Prism.Commands;
 using Prism.Regions;
@@ -10,6 +11,7 @@ namespace AdamDevelopmentEnvironment.Modules.NotifyBar.ViewModels
     public class NotifyBarViewModel : RegionViewModelBase
     {
         public DelegateCommand ExpandNotifyBarCommand { get; private set; }
+        public DelegateCommand ClearNotifyBarGrowlsBarCommand { get; private set; }
 
         private readonly IApplicationCommands mApplicationCommands;
         private bool mNotifyBarIsExpanded = false;
@@ -18,7 +20,13 @@ namespace AdamDevelopmentEnvironment.Modules.NotifyBar.ViewModels
         {
             mApplicationCommands = applicationCommands;
             ExpandNotifyBarCommand = new DelegateCommand(ExpandNotifyBar);
+            ClearNotifyBarGrowlsBarCommand = new DelegateCommand(ClearNotifyBarGrowlsBar);
             mApplicationCommands.ExpandNotifyBarCommand.RegisterCommand(ExpandNotifyBarCommand);
+        }
+
+        private void ClearNotifyBarGrowlsBar()
+        {
+            Growls.ClearNotifyBarGrowls();
         }
 
         #region Manipulate NotifyBar
@@ -38,7 +46,11 @@ namespace AdamDevelopmentEnvironment.Modules.NotifyBar.ViewModels
         public bool NotifyBarIsExpanded
         {
             get { return mNotifyBarIsExpanded; }
-            set { SetProperty(ref mNotifyBarIsExpanded, value); }
+            set 
+            {
+                Growls.NotifyBarIsExpanded = value;
+                SetProperty(ref mNotifyBarIsExpanded, value); 
+            }
         }
 
         #endregion

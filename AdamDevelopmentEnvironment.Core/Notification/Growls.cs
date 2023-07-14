@@ -1,10 +1,5 @@
 ﻿using HandyControl.Controls;
 using HandyControl.Data;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AdamDevelopmentEnvironment.Core.Notification
 {
@@ -23,6 +18,9 @@ namespace AdamDevelopmentEnvironment.Core.Notification
             };
 
             Growl.Error(gf);
+
+            if (NotifyBarIsExpanded)
+                return;
 
             gf.StaysOpen = false;
             gf.Token = "GlobalGrowl";
@@ -43,9 +41,19 @@ namespace AdamDevelopmentEnvironment.Core.Notification
 
             Growl.Info(gf);
 
+            if (NotifyBarIsExpanded)
+                return;
+
             gf.StaysOpen = false;
             gf.Token = "GlobalGrowl";
             Growl.InfoGlobal(gf);
         }
+
+        public static void ClearNotifyBarGrowls()
+        {
+            Growl.Clear("GrowlToNotifyBar");
+        }
+
+        public static bool NotifyBarIsExpanded { get; set; } = false;
     }
 }

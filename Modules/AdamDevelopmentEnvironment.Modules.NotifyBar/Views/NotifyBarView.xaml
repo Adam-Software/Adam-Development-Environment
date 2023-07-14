@@ -9,8 +9,6 @@
              xmlns:prism="http://prismlibrary.com/"
              prism:ViewModelLocator.AutoWireViewModel="True" >
 
-
-
     <Expander Grid.Column="1" ExpandDirection="Right" Visibility="Visible"
               IsExpanded="{Binding NotifyBarIsExpanded, Mode=TwoWay}" 
               Style="{DynamicResource Expander.Small}">
@@ -29,13 +27,23 @@
         </Expander.Header>
 
 
-        <StackPanel Width="Auto" Height="Auto" 
-                    Background="{DynamicResource BackgroundBrush}"
-                    hc:Growl.Token="GrowlToNotifyBar"/>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <hc:SimpleStackPanel Grid.Row="0" 
+                                 Background="{DynamicResource MainContentBackgroundBrush}"
+                                 Width="350" Orientation="Horizontal">
+                <Button Margin="5" Content="Очистить" Command="{Binding ClearNotifyBarGrowlsBarCommand}"/>
+            </hc:SimpleStackPanel>
+
+            <StackPanel Grid.Row="1" 
+                        Background="{DynamicResource MainContentBackgroundBrush}"
+                        hc:Growl.Token="GrowlToNotifyBar"/>
+        </Grid>
 
     </Expander>
-
-
-
-
+    
 </UserControl>
