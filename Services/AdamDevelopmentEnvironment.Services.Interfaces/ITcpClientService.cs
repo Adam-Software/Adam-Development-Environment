@@ -1,8 +1,12 @@
-﻿using System;
+﻿using AdamDevelopmentEnvironment.Services.Interfaces.ITcpClientDependency;
+using System;
 using System.Threading.Tasks;
 
 namespace AdamDevelopmentEnvironment.Services.Interfaces
 {
+    public delegate void ClientConnectedEventHandler(object sender, ConnectionEventArgs e);
+    public delegate void ClientDisconnectedEventHandler(object sender, ConnectionEventArgs e);
+
     /// <summary>
     /// A simple client for implementing outdated connection control functionality and supporting 
     /// older server (aka robot) versions
@@ -10,12 +14,12 @@ namespace AdamDevelopmentEnvironment.Services.Interfaces
     /// </summary>
     public interface ITcpClientService : IDisposable
     {
-        event EventHandler ClientConnected;
+        public event ClientConnectedEventHandler RaiseClientConnectedEvent;
 
-        event EventHandler ClientDisconnected;
+        public event ClientDisconnectedEventHandler RaiseClientDisconnectedEvent;
 
-        Task ReconnectAsync();
-        Task ConnectAsync();
-        Task DisconnectAsync();
+        public Task ReconnectAsync();
+        public Task ConnectAsync();
+        public Task DisconnectAsync();
     }
 }

@@ -12,25 +12,25 @@ namespace AdamDevelopmentEnvironment.Modules.NotifyBar.ViewModels
         public DelegateCommand ExpandNotifyBarCommand { get; private set; }
         public DelegateCommand ClearNotifyBarGrowlsBarCommand { get; private set; }
 
-        private readonly IApplicationCommands mApplicationCommands;
-        private readonly IApplicationGrowls mApplicationGrowls;
+        private IApplicationCommands ApplicationCommands { get; }
+        private IApplicationGrowls ApplicationGrowls { get; }
 
         private bool mNotifyBarIsExpanded = false;
 
         public NotifyBarViewModel(IRegionManager regionManager, ILoggerService loggerService, 
             IApplicationCommands applicationCommands, IApplicationGrowls applicationGrowls) : base(regionManager, loggerService)
         {
-            mApplicationCommands = applicationCommands;
-            mApplicationGrowls = applicationGrowls;
+            ApplicationCommands = applicationCommands;
+            ApplicationGrowls = applicationGrowls;
 
             ExpandNotifyBarCommand = new DelegateCommand(ExpandNotifyBar);
             ClearNotifyBarGrowlsBarCommand = new DelegateCommand(ClearNotifyBarGrowlsBar);
-            mApplicationCommands.ExpandNotifyBarCommand.RegisterCommand(ExpandNotifyBarCommand);
+            ApplicationCommands.ExpandNotifyBarCommand.RegisterCommand(ExpandNotifyBarCommand);
         }
 
         private void ClearNotifyBarGrowlsBar()
         {
-            mApplicationGrowls.ClearNotifyBarGrowls();
+            ApplicationGrowls.ClearNotifyBarGrowls();
         }
 
         #region Manipulate NotifyBar
@@ -54,9 +54,9 @@ namespace AdamDevelopmentEnvironment.Modules.NotifyBar.ViewModels
             set 
             {
                 if (value == true)
-                    mApplicationGrowls.ClearClobalGrowls();
+                    ApplicationGrowls.ClearClobalGrowls();
 
-                mApplicationGrowls.NotShowClobalGrowl = value;
+                ApplicationGrowls.NotShowClobalGrowl = value;
                 SetProperty(ref mNotifyBarIsExpanded, value); 
             }
         }
@@ -66,7 +66,7 @@ namespace AdamDevelopmentEnvironment.Modules.NotifyBar.ViewModels
         //TODO Destroy not work
         public override void Destroy()
         {
-            mApplicationCommands.ExpandNotifyBarCommand.UnregisterCommand(ExpandNotifyBarCommand);
+            ApplicationCommands.ExpandNotifyBarCommand.UnregisterCommand(ExpandNotifyBarCommand);
         }
     }
 }

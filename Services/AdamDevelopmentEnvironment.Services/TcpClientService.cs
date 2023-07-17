@@ -2,16 +2,17 @@
 using SuperSimpleTcp;
 using System;
 using System.Threading.Tasks;
+using ServiceConnectionEventArgs = AdamDevelopmentEnvironment.Services.Interfaces.ITcpClientDependency.ConnectionEventArgs;
 
 namespace AdamDevelopmentEnvironment.Services
 {
     public class TcpClientService : ITcpClientService
     {
-        public event EventHandler ClientConnected;
-        public event EventHandler ClientDisconnected;
+        public event ClientConnectedEventHandler RaiseClientConnectedEvent;
+        public event ClientDisconnectedEventHandler RaiseClientDisconnectedEvent;
         
         private ILoggerService LoggerService { get; set; }
-        private SimpleTcpClient mTcpClient;
+        private readonly SimpleTcpClient mTcpClient;
 
         public TcpClientService(ILoggerService loggerService) 
         {
@@ -27,14 +28,14 @@ namespace AdamDevelopmentEnvironment.Services
 
         private void EventsConnected(object sender, ConnectionEventArgs e)
         {
-            LoggerService.WriteInformationLog($"Client {e.IpPort} connected");
-            ClientConnected?.Invoke(this, e);
+            LoggerService.WriteInformationLog($"Client {e.IpPort} connected {e.Reason}");
+            OnRaiseClientConnectedEvent(e);
         }
 
         private void EventsDisconnected(object sender, ConnectionEventArgs e)
         {
             LoggerService.WriteVerboseLog($"Client {e.IpPort} disconnected. Reason: {e.Reason}");
-            ClientDisconnected?.Invoke(this, e);
+            OnRaiseClientDisconnectedEvent(e);
         }
 
         #endregion
@@ -98,6 +99,32 @@ namespace AdamDevelopmentEnvironment.Services
 
             mTcpClient.Disconnect();
             mTcpClient.Dispose();
+        }
+
+        protected virtual void OnRaiseClientConnectedEvent(ConnectionEventArgs e)
+        {
+            ClientConnectedEventHandler raiseEvent = RaiseClientConnectedEvent;
+
+            ServiceConnectionEventArgs eventArgs = new ServiceConnectionEventArgs
+            {
+                IpPort = e.IpPort,
+                Reason = e.Reason.ToString()
+            };
+            
+            raiseEvent?.Invoke(this, eventArgs);
+        }
+
+        protected virtual void OnRaiseClientDisconnectedEvent(ConnectionEventArgs e)
+        {
+            ClientDisconnectedEventHandler raiseEvent = RaiseClientDisconnectedEvent;
+            
+            ServiceConnectionEventArgs eventArgs = new ServiceConnectionEventArgs
+            {
+                IpPort = e.IpPort,
+                Reason = e.Reason.ToString()
+            };
+
+            raiseEvent?.Invoke(this, eventArgs);
         }
     }
 }
