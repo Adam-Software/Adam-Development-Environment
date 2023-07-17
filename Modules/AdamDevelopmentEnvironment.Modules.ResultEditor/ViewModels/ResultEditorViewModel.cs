@@ -1,11 +1,8 @@
 ﻿using AdamDevelopmentEnvironment.Core.Mvvm;
 using AdamDevelopmentEnvironment.Core.Notification;
 using AdamDevelopmentEnvironment.Services.Interfaces;
-using HandyControl.Controls;
-using HandyControl.Data;
 using Prism.Commands;
 using Prism.Regions;
-using System;
 
 namespace AdamDevelopmentEnvironment.Modules.ResultEditor.ViewModels
 {
@@ -14,8 +11,12 @@ namespace AdamDevelopmentEnvironment.Modules.ResultEditor.ViewModels
         public DelegateCommand TestCommand { get; private set; }
         public DelegateCommand TestCommand2 { get; private set; }
 
-        public ResultEditorViewModel(IRegionManager regionManager, ILoggerService loggerService) : base(regionManager, loggerService)
+        private IApplicationGrowls mApplicationGrowls;
+
+        public ResultEditorViewModel(IRegionManager regionManager, ILoggerService loggerService, IApplicationGrowls applicationGrowls) : base(regionManager, loggerService)
         {
+            mApplicationGrowls = applicationGrowls;
+
             TestCommand = new DelegateCommand(Test);
             TestCommand2 = new DelegateCommand(Test2);
         }
@@ -24,12 +25,12 @@ namespace AdamDevelopmentEnvironment.Modules.ResultEditor.ViewModels
 
         private void Test()
         {
-            Growls.InformationGrowls("Growl information happened");
+            mApplicationGrowls.InformationGrowls("Growl information happened");
         }
 
         private void Test2()
         {
-            Growls.ErrorGrowls("Growl error happened");
+            mApplicationGrowls.ErrorGrowls("Growl error happened");
         }
     }
 }

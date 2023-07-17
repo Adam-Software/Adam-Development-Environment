@@ -1,5 +1,6 @@
 ﻿
 using AdamDevelopmentEnvironment.Core.Commands;
+using AdamDevelopmentEnvironment.Core.Notification;
 using AdamDevelopmentEnvironment.Modules.Blockly;
 using AdamDevelopmentEnvironment.Modules.NotifyBar;
 using AdamDevelopmentEnvironment.Modules.ResultEditor;
@@ -53,6 +54,7 @@ namespace AdamDevelopmentEnvironment
             containerRegistry.RegisterSingleton<ITcpClientService>(() => new TcpClientService(LoggerService));
 
             containerRegistry.RegisterSingleton<IApplicationCommands>(() => new ApplicationCommands());
+            containerRegistry.RegisterSingleton<IApplicationGrowls>(() => new ApplicationGrowls());
         }
 
         protected override void ConfigureModuleCatalog(IModuleCatalog moduleCatalog)

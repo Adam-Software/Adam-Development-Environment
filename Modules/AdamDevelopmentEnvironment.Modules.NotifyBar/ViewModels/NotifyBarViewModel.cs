@@ -4,7 +4,6 @@ using AdamDevelopmentEnvironment.Core.Notification;
 using AdamDevelopmentEnvironment.Services.Interfaces;
 using Prism.Commands;
 using Prism.Regions;
-using System;
 
 namespace AdamDevelopmentEnvironment.Modules.NotifyBar.ViewModels
 {
@@ -14,11 +13,16 @@ namespace AdamDevelopmentEnvironment.Modules.NotifyBar.ViewModels
         public DelegateCommand ClearNotifyBarGrowlsBarCommand { get; private set; }
 
         private readonly IApplicationCommands mApplicationCommands;
+        private readonly IApplicationGrowls mApplicationGrowls;
+
         private bool mNotifyBarIsExpanded = false;
 
-        public NotifyBarViewModel(IRegionManager regionManager, ILoggerService loggerService, IApplicationCommands applicationCommands) : base(regionManager, loggerService)
+        public NotifyBarViewModel(IRegionManager regionManager, ILoggerService loggerService, 
+            IApplicationCommands applicationCommands, IApplicationGrowls applicationGrowls) : base(regionManager, loggerService)
         {
             mApplicationCommands = applicationCommands;
+            mApplicationGrowls = applicationGrowls;
+
             ExpandNotifyBarCommand = new DelegateCommand(ExpandNotifyBar);
             ClearNotifyBarGrowlsBarCommand = new DelegateCommand(ClearNotifyBarGrowlsBar);
             mApplicationCommands.ExpandNotifyBarCommand.RegisterCommand(ExpandNotifyBarCommand);
@@ -26,7 +30,7 @@ namespace AdamDevelopmentEnvironment.Modules.NotifyBar.ViewModels
 
         private void ClearNotifyBarGrowlsBar()
         {
-            Growls.ClearNotifyBarGrowls();
+            mApplicationGrowls.ClearNotifyBarGrowls();
         }
 
         #region Manipulate NotifyBar
@@ -50,9 +54,9 @@ namespace AdamDevelopmentEnvironment.Modules.NotifyBar.ViewModels
             set 
             {
                 if (value == true)
-                    Growls.ClearClobalGrowls();
+                    mApplicationGrowls.ClearClobalGrowls();
 
-                Growls.NotShowClobalGrowl = value;
+                mApplicationGrowls.NotShowClobalGrowl = value;
                 SetProperty(ref mNotifyBarIsExpanded, value); 
             }
         }

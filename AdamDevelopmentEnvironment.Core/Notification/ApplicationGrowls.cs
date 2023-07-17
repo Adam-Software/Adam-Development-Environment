@@ -3,9 +3,9 @@ using HandyControl.Data;
 
 namespace AdamDevelopmentEnvironment.Core.Notification
 {
-    public class Growls
+    public class ApplicationGrowls : IApplicationGrowls
     {
-        public static void ErrorGrowls(string message)
+        public void ErrorGrowls(string message)
         {
             GrowlInfo gf = new()
             {
@@ -27,7 +27,7 @@ namespace AdamDevelopmentEnvironment.Core.Notification
             Growl.ErrorGlobal(gf);
         }
 
-        public static void InformationGrowls(string message)
+        public void InformationGrowls(string message)
         {
             GrowlInfo gf = new()
             {
@@ -49,19 +49,19 @@ namespace AdamDevelopmentEnvironment.Core.Notification
             Growl.InfoGlobal(gf);
         }
 
-        public static void ClearNotifyBarGrowls()
+        public void ClearNotifyBarGrowls()
         {
             Growl.Clear("GrowlToNotifyBar");
         }
 
-        public static void ClearClobalGrowls()
+        public void ClearClobalGrowls()
         {
             Growl.ClearGlobal();
         }
 
         /// <summary>
-        /// If true don`t show Global grawl
+        /// If true don`t show Global growl
         /// </summary>
-        public static bool NotShowClobalGrowl { get; set; } = false;
+        public bool NotShowClobalGrowl { get; set; } = false;
     }
 }
