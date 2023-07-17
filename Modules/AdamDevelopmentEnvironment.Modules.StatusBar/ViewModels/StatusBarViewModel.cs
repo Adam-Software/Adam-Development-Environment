@@ -4,7 +4,6 @@ using AdamDevelopmentEnvironment.Core.Properties;
 using AdamDevelopmentEnvironment.Services.Interfaces;
 using AdamDevelopmentEnvironment.Services.Interfaces.ILoggerDependency;
 using Prism.Regions;
-using System;
 
 namespace AdamDevelopmentEnvironment.Modules.StatusBar.ViewModels
 {
@@ -17,7 +16,7 @@ namespace AdamDevelopmentEnvironment.Modules.StatusBar.ViewModels
         public StatusBarViewModel(IRegionManager regionManager, ILoggerService loggerService, IApplicationCommands applicationCommands) : base(regionManager, loggerService)
         {
             ApplicationCommands = applicationCommands;
-            LoggerService.LogWriteEvent += LogWriteEvent; 
+            LoggerService.RaiseLogWriteEvent += HandleLogWriteEvent; 
         }
 
         public IApplicationCommands ApplicationCommands
@@ -28,14 +27,14 @@ namespace AdamDevelopmentEnvironment.Modules.StatusBar.ViewModels
 
         #region Logger Event
 
-        private void LogWriteEvent(DateTime logDateTime, string logMessage, LogLevel logLevel)
+        private void HandleLogWriteEvent(object sender, LogWriteEventArgs logWriteEventArgs)
         {
             int displayFromLevel = Settings.Default.DisplayLogFromLevel;
 
-            if (((int)logLevel) >= displayFromLevel)
+            if (((int)logWriteEventArgs.LogLevel) >= displayFromLevel)
             {
-                LogLevel = logLevel;
-                LogMessage = $"{logDateTime} {logMessage}";
+                LogLevel = logWriteEventArgs.LogLevel;
+                LogMessage = $"{logWriteEventArgs.LogDateTime} {logWriteEventArgs.LogMessage}";
             }
         }
 

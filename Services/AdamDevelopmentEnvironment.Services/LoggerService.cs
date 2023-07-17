@@ -8,7 +8,7 @@ namespace AdamDevelopmentEnvironment.Services
 {
     public class LoggerService : ILoggerService
     {
-        public event LogWriteEventHandler LogWriteEvent;
+        public event LogWriteEventHandler RaiseLogWriteEvent;
 
         public LoggerService() 
         {
@@ -20,37 +20,37 @@ namespace AdamDevelopmentEnvironment.Services
 
         public void WriteVerboseLog(string logMessage)
         {
-            LogWriteEvent?.Invoke(DateTime.Now.ToLocalTime(), logMessage, LogLevel.Verbose);
+            OnRaiseLogWriteEvent(DateTime.Now.ToLocalTime(), logMessage, LogLevel.Verbose);
             Log.Write(LogEventLevel.Verbose, $"{logMessage}");
         }
 
         public void WriteDebugLog(string logMessage)
         {
-            LogWriteEvent?.Invoke(DateTime.Now.ToLocalTime(), logMessage, LogLevel.Debug);
+            OnRaiseLogWriteEvent(DateTime.Now.ToLocalTime(), logMessage, LogLevel.Debug);
             Log.Write(LogEventLevel.Debug, $"{logMessage}");
         }
 
         public void WriteInformationLog(string logMessage)
         {
-            LogWriteEvent?.Invoke(DateTime.Now.ToLocalTime(), logMessage, LogLevel.Information);
+            OnRaiseLogWriteEvent(DateTime.Now.ToLocalTime(), logMessage, LogLevel.Information);
             Log.Write(LogEventLevel.Information, $"{logMessage}");
         }
 
         public void WriteWarningLog(string logMessage)
         {
-            LogWriteEvent?.Invoke(DateTime.Now.ToLocalTime(), logMessage, LogLevel.Warning);
+            OnRaiseLogWriteEvent(DateTime.Now.ToLocalTime(), logMessage, LogLevel.Warning);
             Log.Write(LogEventLevel.Warning, $"{logMessage}");
         }
 
         public void WriteErrorLog(string logMessage)
         {
-            LogWriteEvent?.Invoke(DateTime.Now.ToLocalTime(), logMessage, LogLevel.Error);
+            OnRaiseLogWriteEvent(DateTime.Now.ToLocalTime(), logMessage, LogLevel.Error);
             Log.Write(LogEventLevel.Error, $"{logMessage}");
         }
 
         public void WriteFatalLog(string logMessage)
         {
-            LogWriteEvent?.Invoke(DateTime.Now.ToLocalTime(), logMessage, LogLevel.Fatal);
+            OnRaiseLogWriteEvent(DateTime.Now.ToLocalTime(), logMessage, LogLevel.Fatal);
             Log.Write(LogEventLevel.Fatal, $"{logMessage}");
         }
 
@@ -58,7 +58,18 @@ namespace AdamDevelopmentEnvironment.Services
         {
            Log.CloseAndFlush();
         }
+        protected virtual void OnRaiseLogWriteEvent(DateTime logDateTime, string logMessage, LogLevel logLevel)
+        {
+            LogWriteEventHandler raiseEvent = RaiseLogWriteEvent;
 
-      
+            LogWriteEventArgs eventArgs = new LogWriteEventArgs
+            {
+                LogDateTime = logDateTime,
+                LogMessage = logMessage,
+                LogLevel = logLevel
+            };
+
+            raiseEvent?.Invoke(this, eventArgs);
+        }
     }
 }

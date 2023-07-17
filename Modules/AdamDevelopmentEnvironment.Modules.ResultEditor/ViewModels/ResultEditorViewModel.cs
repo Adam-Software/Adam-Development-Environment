@@ -11,7 +11,7 @@ namespace AdamDevelopmentEnvironment.Modules.ResultEditor.ViewModels
         public DelegateCommand TestCommand { get; private set; }
         public DelegateCommand TestCommand2 { get; private set; }
 
-        private IApplicationGrowls mApplicationGrowls;
+        private readonly IApplicationGrowls mApplicationGrowls;
 
         public ResultEditorViewModel(IRegionManager regionManager, ILoggerService loggerService, IApplicationGrowls applicationGrowls) : base(regionManager, loggerService)
         {
