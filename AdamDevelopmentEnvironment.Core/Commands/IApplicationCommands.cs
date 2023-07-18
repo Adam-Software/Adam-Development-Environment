@@ -4,6 +4,7 @@ namespace AdamDevelopmentEnvironment.Core.Commands
 {
     public interface IApplicationCommands
     {
-        CompositeCommand ExpandNotifyBarCommand { get; }   
+        CompositeCommand ExpandNotifyBarCommand { get; }
+        CompositeCommand NotShowClobalGrowlCommand { get; }
     }
 }

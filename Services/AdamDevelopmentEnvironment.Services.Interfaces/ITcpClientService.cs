@@ -15,9 +15,7 @@ namespace AdamDevelopmentEnvironment.Services.Interfaces
     public interface ITcpClientService : IDisposable
     {
         public event ClientConnectedEventHandler RaiseClientConnectedEvent;
-
         public event ClientDisconnectedEventHandler RaiseClientDisconnectedEvent;
-
         public Task ReconnectAsync();
         public Task ConnectAsync();
         public Task DisconnectAsync();

@@ -5,6 +5,9 @@ namespace AdamDevelopmentEnvironment.Core.Notification
 {
     public class ApplicationGrowls : IApplicationGrowls
     {
+        public event GrowlsHappenedEventHandler RaiseGrowlsHappenedEvent;
+        public event ClearGrowlsEventHandler RaiseClearGrowlsEvent;
+
         public void ErrorGrowls(string message)
         {
             GrowlInfo gf = new()
@@ -12,7 +15,7 @@ namespace AdamDevelopmentEnvironment.Core.Notification
                 Message = message,
                 StaysOpen = true,
                 IsCustom = true,
-                ShowCloseButton = true,
+                ShowCloseButton = false,
                 WaitTime = 3,
                 Token = "GrowlToNotifyBar",
             };
@@ -25,6 +28,8 @@ namespace AdamDevelopmentEnvironment.Core.Notification
             gf.StaysOpen = false;
             gf.Token = "GlobalGrowl";
             Growl.ErrorGlobal(gf);
+
+            OnRaiseGrowlsHappenedEvent();
         }
 
         public void InformationGrowls(string message)
@@ -32,9 +37,9 @@ namespace AdamDevelopmentEnvironment.Core.Notification
             GrowlInfo gf = new()
             {
                 Message = message,
-                StaysOpen = false,
+                StaysOpen = true,
                 IsCustom = true,
-                ShowCloseButton = true,
+                ShowCloseButton = false,
                 WaitTime = 3,
                 Token = "GrowlToNotifyBar",
             };
@@ -47,21 +52,42 @@ namespace AdamDevelopmentEnvironment.Core.Notification
             gf.StaysOpen = false;
             gf.Token = "GlobalGrowl";
             Growl.InfoGlobal(gf);
+
+            OnRaiseGrowlsHappenedEvent();
         }
 
         public void ClearNotifyBarGrowls()
         {
             Growl.Clear("GrowlToNotifyBar");
+            OnRaiseClearGrowlsEvent(GrowlsType.NotifyBar);
         }
 
         public void ClearClobalGrowls()
         {
             Growl.ClearGlobal();
+            OnRaiseClearGrowlsEvent(GrowlsType.Global);
         }
 
         /// <summary>
         /// If true don`t show Global growl
         /// </summary>
         public bool NotShowClobalGrowl { get; set; } = false;
+
+        protected virtual void OnRaiseGrowlsHappenedEvent()
+        {
+            GrowlsHappenedEventHandler raiseEvent = RaiseGrowlsHappenedEvent;
+            raiseEvent?.Invoke(this);
+        }
+
+        protected virtual void OnRaiseClearGrowlsEvent(GrowlsType growlsType)
+        {
+            ClearGrowlsEventHandler raiseEvent = RaiseClearGrowlsEvent;
+            ClearGrowlsEventArgs growlsEventArgs = new()
+            {
+                GrowlsType = growlsType,
+            };
+
+            raiseEvent?.Invoke(this, growlsEventArgs);
+        }
     }
 }

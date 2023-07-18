@@ -16,7 +16,7 @@
     </UserControl.Resources>
 
 
-    <StatusBar Height="25">
+    <StatusBar Height="27">
         <StatusBar.ItemsPanel>
             <ItemsPanelTemplate>
                 <Grid>
@@ -30,7 +30,8 @@
             </ItemsPanelTemplate>
         </StatusBar.ItemsPanel>
 
-        <StatusBarItem Grid.Column="0" Padding="10 0 5 0">
+        <StatusBarItem Grid.Column="0" Padding="0" Margin="10 0 0 0">
+            
             <StackPanel Orientation="Horizontal">
                 <Path Margin="0 0 5 0"
                       Width="16" 
@@ -47,36 +48,39 @@
                            FontSize="11"
                            Style="{StaticResource TextBlockDefaultBold}" />
             </StackPanel>
+            
         </StatusBarItem>
 
-        <StatusBarItem Grid.Column="1" Padding="0 0 0 0">
-            <Button hc:IconElement.Geometry="{DynamicResource BellOutline}"
-                    hc:IconElement.Height="16"
-                    hc:IconElement.Width="16"
+        <StatusBarItem Grid.Column="1" Padding="0">
+            
+            <hc:Badge Status="Dot" 
+                      ShowBadge="{Binding IsBadgeShow}" 
+                      Height="17"
+                      BadgeMargin="0 3 11 0" 
+                      Style="{DynamicResource BadgeDanger}">
+                
+                <Button hc:IconElement.Geometry="{DynamicResource BellOutline}"
+                    hc:IconElement.Height="17"
+                    hc:IconElement.Width="17"
                     Style="{StaticResource  ButtonIcon}"
                     Command="{Binding ApplicationCommands.ExpandNotifyBarCommand }">
-                
-                <Button.ContextMenu>
-                    <ContextMenu StaysOpen="true" 
+
+                    <Button.ContextMenu>
+                        <ContextMenu StaysOpen="true" 
                                  Style="{DynamicResource ContextMenu.Small}">
-                        
-                        <MenuItem Header="Очистить все"
-                                  IsCheckable="False"/>
-                        <MenuItem Header="Показывать уведомления"
-                                  IsCheckable="False">
-                            <MenuItem Header="Все"
-                                      IsCheckable="True"
-                                      IsChecked="True"/>
-                            <MenuItem Header="Только важные"
-                                      IsCheckable="True"
-                                      IsChecked="False"/>
-                            <MenuItem Header="Никаких"
-                                      IsCheckable="True"
-                                      IsChecked="False"/>
-                        </MenuItem>
-                    </ContextMenu>
-                </Button.ContextMenu>
-            </Button>
+
+                            <MenuItem Header="Очистить все"
+                                      Command="{Binding ClearNotifyBarGrowlsMenuItemCommand}"/>
+                            <MenuItem Header="Не показывать уведомления"
+                                  IsCheckable="True"
+                                  IsChecked="{Binding NotShowClobalGrowl}"
+                                  Command="{Binding ApplicationCommands.NotShowClobalGrowlCommand }"/>
+                            
+                        </ContextMenu>
+                    </Button.ContextMenu>
+                </Button>
+            </hc:Badge>
+            
         </StatusBarItem>
 
 
