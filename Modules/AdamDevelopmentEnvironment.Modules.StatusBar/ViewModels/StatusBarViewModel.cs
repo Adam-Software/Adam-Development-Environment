@@ -33,7 +33,6 @@ namespace AdamDevelopmentEnvironment.Modules.StatusBar.ViewModels
             ApplicationGrowls.RaiseGrowlsHappenedEvent += RaiseGrowlsHappenedEvent;
 
             ClearNotifyBarGrowlsMenuItemCommand = new DelegateCommand(ClearAllGrowls);
-
         }
 
         public IApplicationCommands ApplicationCommands
@@ -44,15 +43,15 @@ namespace AdamDevelopmentEnvironment.Modules.StatusBar.ViewModels
 
         #region BellMenu fields
 
-        /*public bool NotShowClobalGrowl
+        public bool NotShowClobalGrowl
         {
             get { return mNotShowClobalGrowl; }    
             set 
             {
-                NotShowGlobalGrowlCheck(value);
+                ApplicationGrowls.NotShowClobalGrowl = value;
                 SetProperty(ref mNotShowClobalGrowl, value); 
             }
-        }*/
+        }
 
         #endregion
 
@@ -108,6 +107,7 @@ namespace AdamDevelopmentEnvironment.Modules.StatusBar.ViewModels
         #endregion
 
         #region GrowlsEvent
+
         private void RaiseGrowlsHappenedEvent(object sender)
         {
             if (IsBadgeShow)

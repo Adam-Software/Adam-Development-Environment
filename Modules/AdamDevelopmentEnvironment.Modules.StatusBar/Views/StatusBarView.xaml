@@ -67,14 +67,15 @@
 
                     <Button.ContextMenu>
                         <ContextMenu StaysOpen="true" 
-                                 Style="{DynamicResource ContextMenu.Small}">
+                                     Style="{DynamicResource ContextMenu.Small}">
 
                             <MenuItem Header="Очистить все"
                                       Command="{Binding ClearNotifyBarGrowlsMenuItemCommand}"/>
-                            <MenuItem Header="Не показывать уведомления"
-                                  IsCheckable="True"
-                                  IsChecked="{Binding NotShowClobalGrowl}"
-                                  Command="{Binding ApplicationCommands.NotShowClobalGrowlCommand }"/>
+                            
+                            <MenuItem Name="NotShowGlobalGrowl"
+                                      Header="Не показывать уведомления"
+                                      IsCheckable="True"
+                                      IsChecked="{Binding NotShowClobalGrowl}"/>
                             
                         </ContextMenu>
                     </Button.ContextMenu>

@@ -4,7 +4,6 @@ using AdamDevelopmentEnvironment.Core.Notification;
 using AdamDevelopmentEnvironment.Services.Interfaces;
 using Prism.Commands;
 using Prism.Regions;
-using System.Windows.Input;
 
 namespace AdamDevelopmentEnvironment.Modules.NotifyBar.ViewModels
 {
@@ -12,8 +11,6 @@ namespace AdamDevelopmentEnvironment.Modules.NotifyBar.ViewModels
     {
         public DelegateCommand ExpandNotifyBarCommand { get; private set; }
         public DelegateCommand ClearNotifyBarGrowlsBarCommand { get; private set; }
-        public DelegateCommand<object> NotShowClobalGrowlCommand { get; private set; }
-
         private IApplicationCommands ApplicationCommands { get; }
         private IApplicationGrowls ApplicationGrowls { get; }
 
@@ -27,25 +24,13 @@ namespace AdamDevelopmentEnvironment.Modules.NotifyBar.ViewModels
 
             ExpandNotifyBarCommand = new DelegateCommand(ExpandNotifyBar);
             ClearNotifyBarGrowlsBarCommand = new DelegateCommand(ClearNotifyBarGrowlsBar);
-            NotShowClobalGrowlCommand = new DelegateCommand<object>(NotShowClobalGrowl, CanSubmit);
 
             ApplicationCommands.ExpandNotifyBarCommand.RegisterCommand(ExpandNotifyBarCommand);
-            ApplicationCommands.NotShowClobalGrowlCommand.RegisterCommand(NotShowClobalGrowlCommand);
         }
 
         private void ClearNotifyBarGrowlsBar()
         {
             ApplicationGrowls.ClearNotifyBarGrowls();
-        }
-
-        private void NotShowClobalGrowl(object IsNotShowEnable)
-        {
-            var s = IsNotShowEnable;
-        }
-
-        bool CanSubmit(object parameter)
-        {
-            return true;
         }
 
         #region Manipulate NotifyBar
@@ -71,7 +56,7 @@ namespace AdamDevelopmentEnvironment.Modules.NotifyBar.ViewModels
                 if (value == true)
                     ApplicationGrowls.ClearClobalGrowls();
 
-                ApplicationGrowls.NotShowClobalGrowl = value;
+                //ApplicationGrowls.NotShowClobalGrowl = value;
                 SetProperty(ref mNotifyBarIsExpanded, value); 
             }
         }

@@ -10,11 +10,5 @@ namespace AdamDevelopmentEnvironment.Core.Commands
         {
             get { return mExpandNotifyBarCommand; }
         }
-
-        private readonly CompositeCommand mNotShowClobalGrowlCommand = new();
-        public CompositeCommand NotShowClobalGrowlCommand
-        {
-            get { return mNotShowClobalGrowlCommand; }
-        }
     }
 }
