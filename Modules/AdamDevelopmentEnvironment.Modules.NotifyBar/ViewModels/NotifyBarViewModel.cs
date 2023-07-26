@@ -56,7 +56,6 @@ namespace AdamDevelopmentEnvironment.Modules.NotifyBar.ViewModels
                 if (value == true)
                     ApplicationGrowls.ClearClobalGrowls();
 
-                //ApplicationGrowls.NotShowClobalGrowl = value;
                 SetProperty(ref mNotifyBarIsExpanded, value); 
             }
         }

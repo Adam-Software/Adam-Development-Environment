@@ -71,7 +71,18 @@ namespace AdamDevelopmentEnvironment.Core.Notification
         /// <summary>
         /// If true don`t show Global growl
         /// </summary>
-        public bool NotShowClobalGrowl { get; set; } = false;
+        private bool mNotShowClobalGrowl = false;
+        public bool NotShowClobalGrowl 
+        { 
+            get { return mNotShowClobalGrowl; }
+            set 
+            { 
+                if(value == mNotShowClobalGrowl)
+                    return;
+
+                mNotShowClobalGrowl = value;
+            } 
+        }
 
         protected virtual void OnRaiseGrowlsHappenedEvent()
         {

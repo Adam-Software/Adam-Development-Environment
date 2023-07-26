@@ -12,7 +12,6 @@ namespace AdamDevelopmentEnvironment.Modules.StatusBar.ViewModels
     public class StatusBarViewModel : RegionViewModelBase
     {
         public DelegateCommand ClearNotifyBarGrowlsMenuItemCommand { get; private set; }
-
         private IApplicationGrowls ApplicationGrowls { get; set; }
 
         private IApplicationCommands mApplicationCommands;
@@ -46,11 +45,7 @@ namespace AdamDevelopmentEnvironment.Modules.StatusBar.ViewModels
         public bool NotShowClobalGrowl
         {
             get { return mNotShowClobalGrowl; }    
-            set 
-            {
-                ApplicationGrowls.NotShowClobalGrowl = value;
-                SetProperty(ref mNotShowClobalGrowl, value); 
-            }
+            set { SetProperty(ref mNotShowClobalGrowl, value); }
         }
 
         #endregion
