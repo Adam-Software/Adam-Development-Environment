@@ -10,6 +10,8 @@ namespace AdamDevelopmentEnvironment.Core.Notification
 
         public void ErrorGrowls(string message)
         {
+           
+
             GrowlInfo gf = new()
             {
                 Message = message,
@@ -25,15 +27,20 @@ namespace AdamDevelopmentEnvironment.Core.Notification
             if (NotShowClobalGrowl)
                 return;
 
+            OnRaiseGrowlsHappenedEvent();
+
+            if (IsSilentModeEnabled)
+                return;
+
             gf.StaysOpen = false;
             gf.Token = "GlobalGrowl";
             Growl.ErrorGlobal(gf);
-
-            OnRaiseGrowlsHappenedEvent();
         }
 
         public void InformationGrowls(string message)
         {
+            
+
             GrowlInfo gf = new()
             {
                 Message = message,
@@ -49,11 +56,14 @@ namespace AdamDevelopmentEnvironment.Core.Notification
             if (NotShowClobalGrowl)
                 return;
 
+            OnRaiseGrowlsHappenedEvent();
+
+            if (IsSilentModeEnabled) 
+                return; 
+
             gf.StaysOpen = false;
             gf.Token = "GlobalGrowl";
             Growl.InfoGlobal(gf);
-
-            OnRaiseGrowlsHappenedEvent();
         }
 
         public void ClearNotifyBarGrowls()
@@ -82,6 +92,23 @@ namespace AdamDevelopmentEnvironment.Core.Notification
 
                 mNotShowClobalGrowl = value;
             } 
+        }
+
+        /// <summary>
+        /// Silent mode disabled global growls
+        /// </summary>
+        private bool mIsSilentModeEnabled;
+        public bool IsSilentModeEnabled
+        {
+            get { return mIsSilentModeEnabled; }
+            set
+            {
+                if (value == mIsSilentModeEnabled)
+                    return;
+
+                mIsSilentModeEnabled = value;
+
+            }
         }
 
         protected virtual void OnRaiseGrowlsHappenedEvent()

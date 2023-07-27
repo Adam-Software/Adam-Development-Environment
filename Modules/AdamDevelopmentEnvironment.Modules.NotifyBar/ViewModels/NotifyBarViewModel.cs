@@ -26,12 +26,29 @@ namespace AdamDevelopmentEnvironment.Modules.NotifyBar.ViewModels
             ClearNotifyBarGrowlsBarCommand = new DelegateCommand(ClearNotifyBarGrowlsBar);
 
             ApplicationCommands.ExpandNotifyBarCommand.RegisterCommand(ExpandNotifyBarCommand);
+
+            ApplicationGrowls.RaiseClearGrowlsEvent += RaiseClearGrowlsEvent;
+            ApplicationGrowls.RaiseGrowlsHappenedEvent += RaiseGrowlsHappenedEvent;
         }
 
         private void ClearNotifyBarGrowlsBar()
         {
             ApplicationGrowls.ClearNotifyBarGrowls();
         }
+
+        private bool mIsBadgeShow;
+        public bool IsBadgeShow
+        {
+            get { return mIsBadgeShow; }
+            set 
+            {
+                if (mIsBadgeShow == value) 
+                    return;
+
+                SetProperty(ref mIsBadgeShow, value); 
+            }
+        }
+
 
         #region Manipulate NotifyBar
 
@@ -54,10 +71,27 @@ namespace AdamDevelopmentEnvironment.Modules.NotifyBar.ViewModels
             set 
             {
                 if (value == true)
+                {
                     ApplicationGrowls.ClearClobalGrowls();
+                }
 
+                ApplicationGrowls.NotShowClobalGrowl = value;
                 SetProperty(ref mNotifyBarIsExpanded, value); 
             }
+        }
+
+        #endregion
+
+        #region GrowlsEvent
+
+        private void RaiseGrowlsHappenedEvent(object sender)
+        {
+            IsBadgeShow = true;
+        }
+
+        private void RaiseClearGrowlsEvent(object sender, ClearGrowlsEventArgs e)
+        {
+            IsBadgeShow = false;
         }
 
         #endregion

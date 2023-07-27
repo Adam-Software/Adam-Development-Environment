@@ -13,12 +13,12 @@ namespace AdamDevelopmentEnvironment.Modules.StatusBar.ViewModels
     {
         public DelegateCommand ClearNotifyBarGrowlsMenuItemCommand { get; private set; }
         private IApplicationGrowls ApplicationGrowls { get; set; }
+        private bool mIsSilentModeEnabled = false;
+        private LogLevel? mLogLevel = null;
 
         private IApplicationCommands mApplicationCommands;
         private string mLogMessage;
-        private LogLevel? mLogLevel = null;
-        private bool mIsBadgeShow;
-        private bool mNotShowClobalGrowl;
+        private bool mIsGrowlsHappened;
 
         public StatusBarViewModel(IRegionManager regionManager, ILoggerService loggerService,
             IApplicationCommands applicationCommands, IApplicationGrowls applicationGrowls) : base(regionManager, loggerService)
@@ -42,20 +42,26 @@ namespace AdamDevelopmentEnvironment.Modules.StatusBar.ViewModels
 
         #region BellMenu fields
 
-        public bool NotShowClobalGrowl
+        public bool IsSilentModeEnabled
         {
-            get { return mNotShowClobalGrowl; }    
-            set { SetProperty(ref mNotShowClobalGrowl, value); }
+            get { return mIsSilentModeEnabled; }    
+            set 
+            {
+                ApplicationGrowls.IsSilentModeEnabled = value;
+                SetProperty(ref mIsSilentModeEnabled, value); 
+            }
         }
 
-        #endregion
-
-        #region Badge fields
-
-        public bool IsBadgeShow
+        public bool IsGrowlsHappened
         {
-            get { return mIsBadgeShow; }
-            set { SetProperty(ref mIsBadgeShow, value); }
+            get { return mIsGrowlsHappened; }
+            set 
+            {
+                if (mIsGrowlsHappened == value)
+                    return;
+
+                SetProperty(ref mIsGrowlsHappened, value); 
+            }
         }
 
         #endregion
@@ -105,18 +111,12 @@ namespace AdamDevelopmentEnvironment.Modules.StatusBar.ViewModels
 
         private void RaiseGrowlsHappenedEvent(object sender)
         {
-            if (IsBadgeShow)
-                return;
-
-            IsBadgeShow = true;
+            IsGrowlsHappened = true;
         }
 
         private void RaiseClearGrowlsEvent(object sender, ClearGrowlsEventArgs e)
         {
-            if (!IsBadgeShow)
-                return;
-
-            IsBadgeShow = false;
+            IsGrowlsHappened = false;
         }
 
         #endregion

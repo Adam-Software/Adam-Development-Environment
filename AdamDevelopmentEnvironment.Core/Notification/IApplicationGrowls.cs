@@ -12,5 +12,8 @@
         void ClearNotifyBarGrowls();
         void ClearClobalGrowls();
         bool NotShowClobalGrowl { get; set; }
+        bool IsSilentModeEnabled { get; set; }
+             
+
     }
 }

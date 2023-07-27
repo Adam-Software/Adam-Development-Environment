@@ -20,8 +20,9 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
 
-                <TextBlock Grid.Column="0" />
-                <TextBlock Grid.Column="1" Text="Уведомления" />
+                <TextBlock Grid.Column="0" Text="Уведомления" FontWeight="Bold" />
+                <hc:Badge Grid.Column="1" Status="Dot" Style="{StaticResource  BadgeDanger}" BadgeMargin="-3 2 0 0" ShowBadge="{Binding IsBadgeShow}"/>
+                
 
             </Grid>
         </Expander.Header>
