@@ -3,6 +3,7 @@ using AdamDevelopmentEnvironment.Core.Notification;
 using AdamDevelopmentEnvironment.Services.Interfaces;
 using Prism.Commands;
 using Prism.Regions;
+using System;
 
 namespace AdamDevelopmentEnvironment.Modules.ResultEditor.ViewModels
 {
@@ -10,6 +11,7 @@ namespace AdamDevelopmentEnvironment.Modules.ResultEditor.ViewModels
     {
         public DelegateCommand TestCommand { get; private set; }
         public DelegateCommand TestCommand2 { get; private set; }
+        public DelegateCommand TestCommand3 { get; private set; }
 
         private readonly IApplicationGrowls mApplicationGrowls;
 
@@ -19,6 +21,7 @@ namespace AdamDevelopmentEnvironment.Modules.ResultEditor.ViewModels
 
             TestCommand = new DelegateCommand(Test);
             TestCommand2 = new DelegateCommand(Test2);
+            TestCommand3 = new DelegateCommand(Test3);
         }
 
         public override void OnNavigatedTo(NavigationContext navigationContext){}
@@ -31,6 +34,17 @@ namespace AdamDevelopmentEnvironment.Modules.ResultEditor.ViewModels
         private void Test2()
         {
             mApplicationGrowls.ErrorGrowls("Growl error happened");
+        }
+
+        private void Test3()
+        {
+            mApplicationGrowls.AskGrowls("Growl ask happened",  AskAction);
+        }
+
+        private bool AskAction(bool arg)
+        {
+            mApplicationGrowls.InformationGrowls($"Ask action work! Arg is {arg}");
+            return arg;
         }
     }
 }

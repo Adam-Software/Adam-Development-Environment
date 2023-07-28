@@ -1,4 +1,6 @@
-﻿namespace AdamDevelopmentEnvironment.Core.Notification
+﻿using System;
+
+namespace AdamDevelopmentEnvironment.Core.Notification
 {
     public delegate void GrowlsHappenedEventHandler(object sender);
     public delegate void ClearGrowlsEventHandler(object sender, ClearGrowlsEventArgs e);
@@ -9,6 +11,7 @@
 
         void ErrorGrowls(string message);
         void InformationGrowls(string message);
+        void AskGrowls(string message, Func<bool, bool> actionBeforeClose);
         void ClearNotifyBarGrowls();
         void ClearClobalGrowls();
         bool NotShowClobalGrowl { get; set; }

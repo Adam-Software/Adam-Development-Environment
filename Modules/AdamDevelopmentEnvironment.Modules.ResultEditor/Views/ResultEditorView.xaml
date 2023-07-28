@@ -13,6 +13,7 @@
         <DockPanel  VerticalAlignment="Top" Margin="0" Background="{StaticResource   MainContentBackgroundBrush}" LastChildFill="False">
             <Button Content="Show info" Margin="5" Command="{Binding TestCommand}" DockPanel.Dock="Left"/>
             <Button Content="Show Error" Margin="5" Command="{Binding TestCommand2}" DockPanel.Dock="Left"  />
+            <Button Content="Show Error" Margin="5" Command="{Binding TestCommand3}" DockPanel.Dock="Left"  />
             
         </DockPanel>
     </Grid>

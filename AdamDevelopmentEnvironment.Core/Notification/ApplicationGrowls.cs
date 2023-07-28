@@ -1,5 +1,7 @@
 ﻿using HandyControl.Controls;
 using HandyControl.Data;
+using System;
+using System.Windows.Navigation;
 
 namespace AdamDevelopmentEnvironment.Core.Notification
 {
@@ -10,8 +12,6 @@ namespace AdamDevelopmentEnvironment.Core.Notification
 
         public void ErrorGrowls(string message)
         {
-           
-
             GrowlInfo gf = new()
             {
                 Message = message,
@@ -39,8 +39,6 @@ namespace AdamDevelopmentEnvironment.Core.Notification
 
         public void InformationGrowls(string message)
         {
-            
-
             GrowlInfo gf = new()
             {
                 Message = message,
@@ -61,6 +59,39 @@ namespace AdamDevelopmentEnvironment.Core.Notification
             if (IsSilentModeEnabled) 
                 return; 
 
+            gf.StaysOpen = false;
+            gf.Token = "GlobalGrowl";
+            Growl.InfoGlobal(gf);
+        }
+
+        public void AskGrowls(string message, Func<bool, bool> actionBeforeClose)
+        {
+            GrowlInfo gf = new()
+            {
+                Message = message,
+                StaysOpen = true,
+                IsCustom = true,
+                ShowCloseButton = false,
+                CancelStr = "Отменить",
+                ConfirmStr = "Подтвердить",
+                WaitTime = 3,
+                Token = "GrowlToNotifyBar",
+                ActionBeforeClose = actionBeforeClose
+            };
+
+            Growl.Ask(gf);
+            
+
+            if (NotShowClobalGrowl)
+                return;
+
+            OnRaiseGrowlsHappenedEvent();
+
+            if (IsSilentModeEnabled)
+                return;
+
+            gf.ActionBeforeClose = null;
+            gf.Message = "Пришло уведомление требующее действия";
             gf.StaysOpen = false;
             gf.Token = "GlobalGrowl";
             Growl.InfoGlobal(gf);
