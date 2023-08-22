@@ -21,6 +21,7 @@ namespace AdamDevelopmentEnvironment.Services
             
             mTcpClient.Events.Connected += EventsConnected;
             mTcpClient.Events.Disconnected += EventsDisconnected;
+
             LoggerService.WriteInformationLog("Init tcp client complete");
         }
 
@@ -28,17 +29,22 @@ namespace AdamDevelopmentEnvironment.Services
 
         private void EventsConnected(object sender, ConnectionEventArgs e)
         {
-            LoggerService.WriteInformationLog($"Client {e.IpPort} connected {e.Reason}");
+            IsConnected = true;
+            LoggerService.WriteInformationLog($"Client {e.IpPort} connected");
             OnRaiseClientConnectedEvent(e);
         }
 
         private void EventsDisconnected(object sender, ConnectionEventArgs e)
         {
+            IsConnected = false;
             LoggerService.WriteVerboseLog($"Client {e.IpPort} disconnected. Reason: {e.Reason}");
             OnRaiseClientDisconnectedEvent(e);
         }
 
         #endregion
+
+        public bool IsConnected { get; private set; }
+
 
         public Task ConnectAsync()
         {
@@ -48,7 +54,7 @@ namespace AdamDevelopmentEnvironment.Services
 
             try
             {
-                mTcpClient.Connect();
+                mTcpClient.ConnectWithRetries(5000);
                 task = Task.CompletedTask;
             }
             catch (Exception ex)
@@ -60,6 +66,7 @@ namespace AdamDevelopmentEnvironment.Services
             return task;
         }
 
+        
         public Task DisconnectAsync()
         {
             Task task;

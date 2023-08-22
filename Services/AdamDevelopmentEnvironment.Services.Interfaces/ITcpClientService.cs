@@ -19,5 +19,6 @@ namespace AdamDevelopmentEnvironment.Services.Interfaces
         public Task ReconnectAsync();
         public Task ConnectAsync();
         public Task DisconnectAsync();
+        public bool IsConnected { get; }
     }
 }

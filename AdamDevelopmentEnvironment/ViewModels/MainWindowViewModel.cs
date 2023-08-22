@@ -1,4 +1,5 @@
 ﻿using AdamDevelopmentEnvironment.Core;
+using AdamDevelopmentEnvironment.Core.Notification;
 using AdamDevelopmentEnvironment.Services;
 using AdamDevelopmentEnvironment.Services.Interfaces;
 using AdamDevelopmentEnvironment.Views;
@@ -24,20 +25,64 @@ namespace AdamDevelopmentEnvironment.ViewModels
         private ILoggerService LoggerService { get; }
         private IRegionManager RegionManager { get; }
         private ITcpClientService TcpClientService { get; }
+        private IApplicationGrowls ApplicationGrowls { get; }
 
-        public MainWindowViewModel(IRegionManager regionManager, ILoggerService loggerService, ITcpClientService tcpClientService)
+        public MainWindowViewModel(IRegionManager regionManager, ILoggerService loggerService, ITcpClientService tcpClientService, 
+            IApplicationGrowls applicationGrowls)
         {
             RegionManager = regionManager;
             LoggerService = loggerService;
             TcpClientService = tcpClientService;
+            ApplicationGrowls = applicationGrowls;
 
-            LoggerService.WriteInformationLog("Main window loaded");
             OpenSettingsWindowCommand = new DelegateCommand(OpenSettingsWindow);
-
-            tcpClientService.ConnectAsync().Await();
 
             Application.Current.MainWindow.Loaded += MainWindowLoaded;
             Application.Current.MainWindow.Closed += MainWindowClosed;
+
+            TcpClientService.RaiseClientConnectedEvent += TcpClientService_RaiseClientConnectedEvent;
+            TcpClientService.RaiseClientDisconnectedEvent += TcpClientService_RaiseClientDisconnectedEvent;
+        }
+
+        private void TcpClientService_RaiseClientDisconnectedEvent(object sender, Services.Interfaces.ITcpClientDependency.ConnectionEventArgs e)
+        {
+            ApplicationGrowls.AskGrowls("Робот отключен. Переподключить?", ReconnectTcpConnection);
+        }
+
+        private bool ReconnectTcpConnection(bool arg)
+        {
+            if (arg)
+            {
+                Task.Run(Reconnect);
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+            
+        }
+
+        private async void Reconnect()
+        {
+            try 
+            {
+                await TcpClientService.ConnectAsync();
+
+                if(!TcpClientService.IsConnected)
+                    ApplicationGrowls.AskGrowls("Робот отключен. Переподключить?", ReconnectTcpConnection);
+
+            }
+            catch(Exception ex)
+            {
+                LoggerService.WriteErrorLog($"Error when tcp connect {ex.Message}");
+                ApplicationGrowls.InformationGrowls("Задача переподключения закончена с ошибками");
+            }
+        }
+
+        private void TcpClientService_RaiseClientConnectedEvent(object sender, Services.Interfaces.ITcpClientDependency.ConnectionEventArgs e)
+        {
+            ApplicationGrowls.InformationGrowls("Робот подключен");
         }
 
         #region MainWindow event
