@@ -55,7 +55,7 @@
         <StatusBarItem Grid.Column="1" Padding="0">
 
             <Button Style="{StaticResource  ButtonCustom}"
-                        Command="{Binding ApplicationCommands.ExpandNotifyBarCommand }">
+                    Command="{Binding ApplicationCommands.ExpandNotifyBarCommand }">
 
                 <StackPanel Orientation="Horizontal">
 

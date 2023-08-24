@@ -27,8 +27,8 @@ namespace AdamDevelopmentEnvironment.Modules.NotifyBar.ViewModels
 
             ApplicationCommands.ExpandNotifyBarCommand.RegisterCommand(ExpandNotifyBarCommand);
 
-            ApplicationGrowls.RaiseClearGrowlsEvent += RaiseClearGrowlsEvent;
-            ApplicationGrowls.RaiseGrowlsHappenedEvent += RaiseGrowlsHappenedEvent;
+            //ApplicationGrowls.RaiseClearGrowlsEvent += RaiseClearGrowlsEvent;
+            //ApplicationGrowls.RaiseGrowlsHappenedEvent += RaiseGrowlsHappenedEvent;
         }
 
         private void ClearNotifyBarGrowlsBar()
@@ -36,7 +36,7 @@ namespace AdamDevelopmentEnvironment.Modules.NotifyBar.ViewModels
             ApplicationGrowls.ClearNotifyBarGrowls();
         }
 
-        private bool mIsBadgeShow;
+        /*private bool mIsBadgeShow;
         public bool IsBadgeShow
         {
             get { return mIsBadgeShow; }
@@ -47,7 +47,7 @@ namespace AdamDevelopmentEnvironment.Modules.NotifyBar.ViewModels
 
                 SetProperty(ref mIsBadgeShow, value); 
             }
-        }
+        }*/
 
 
         #region Manipulate NotifyBar
@@ -84,7 +84,7 @@ namespace AdamDevelopmentEnvironment.Modules.NotifyBar.ViewModels
 
         #region GrowlsEvent
 
-        private void RaiseGrowlsHappenedEvent(object sender)
+        /*private void RaiseGrowlsHappenedEvent(object sender)
         {
             IsBadgeShow = true;
         }
@@ -92,7 +92,7 @@ namespace AdamDevelopmentEnvironment.Modules.NotifyBar.ViewModels
         private void RaiseClearGrowlsEvent(object sender, ClearGrowlsEventArgs e)
         {
             IsBadgeShow = false;
-        }
+        }*/
 
         #endregion
 

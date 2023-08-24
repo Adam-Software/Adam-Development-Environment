@@ -1,10 +1,7 @@
 ﻿using AdamDevelopmentEnvironment.Core;
 using AdamDevelopmentEnvironment.Core.Notification;
-using AdamDevelopmentEnvironment.Services;
 using AdamDevelopmentEnvironment.Services.Interfaces;
-using AdamDevelopmentEnvironment.Views;
-using HandyControl.Controls;
-using HandyControl.Data;
+using AdamDevelopmentEnvironment.Services.Interfaces.ITcpClientDependency;
 using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Regions;
@@ -17,8 +14,8 @@ namespace AdamDevelopmentEnvironment.ViewModels
 {
     public class MainWindowViewModel : BindableBase
     {
-        public  string Title => "Adam Development Environment";
-        public DelegateCommand OpenSettingsWindowCommand { get; private set; }
+        public static string Title => "Adam Development Environment";
+        public DelegateCommand OpenSettingsWindowCommand { get; }
 
         private double mBlocklyWidthRegion = Settings.Default.BlocklyWidthRegion;
         private double mSourceEditorHeight = Settings.Default.SourceEditorHeight;
@@ -37,69 +34,56 @@ namespace AdamDevelopmentEnvironment.ViewModels
 
             OpenSettingsWindowCommand = new DelegateCommand(OpenSettingsWindow);
 
-            Application.Current.MainWindow.Loaded += MainWindowLoaded;
-            Application.Current.MainWindow.Closed += MainWindowClosed;
+            TcpClientService.RaiseClientConnectedEvent += RaiseClientConnectedEvent;
+            TcpClientService.RaiseClientDisconnectedEvent += RaiseClientDisconnectedEvent;
 
-            TcpClientService.RaiseClientConnectedEvent += TcpClientService_RaiseClientConnectedEvent;
-            TcpClientService.RaiseClientDisconnectedEvent += TcpClientService_RaiseClientDisconnectedEvent;
+            Task.Run(ReconnectAsync);
         }
 
-        private void TcpClientService_RaiseClientDisconnectedEvent(object sender, Services.Interfaces.ITcpClientDependency.ConnectionEventArgs e)
+        private void DisconnectGrowlShow()
         {
-            ApplicationGrowls.AskGrowls("Робот отключен. Переподключить?", ReconnectTcpConnection);
-        }
-
-        private bool ReconnectTcpConnection(bool arg)
-        {
-            if (arg)
+            ApplicationGrowls.AskGrowls("Робот отключен. Переподключить?", isConfirmed =>
             {
-                Task.Run(Reconnect);
+                if (isConfirmed)
+                {
+                    Task.Run(ReconnectAsync);
+                }
+
                 return true;
-            }
-            else
-            {
-                return false;
-            }
-            
+            });
         }
-
-        private async void Reconnect()
+        
+        private async void ReconnectAsync()
         {
             try 
             {
                 await TcpClientService.ConnectAsync();
 
-                if(!TcpClientService.IsConnected)
-                    ApplicationGrowls.AskGrowls("Робот отключен. Переподключить?", ReconnectTcpConnection);
+                if (!TcpClientService.IsConnected)
+                    DisconnectGrowlShow();
 
             }
             catch(Exception ex)
             {
                 LoggerService.WriteErrorLog($"Error when tcp connect {ex.Message}");
-                ApplicationGrowls.InformationGrowls("Задача переподключения закончена с ошибками");
+                ApplicationGrowls.ErrorGrowls("Задача переподключения закончена с ошибками");
             }
         }
 
-        private void TcpClientService_RaiseClientConnectedEvent(object sender, Services.Interfaces.ITcpClientDependency.ConnectionEventArgs e)
+        #region tcp client connected/disconected event
+
+        private void RaiseClientConnectedEvent(object sender, ConnectionEventArgs e)
         {
             ApplicationGrowls.InformationGrowls("Робот подключен");
         }
 
-        #region MainWindow event
-
-        private void MainWindowLoaded(object sender, RoutedEventArgs e)
+        private void RaiseClientDisconnectedEvent(object sender, ConnectionEventArgs e)
         {
-            //Test connect, so that the log has time to be displayed on the status bar
-            TcpClientService.ConnectAsync();
+            DisconnectGrowlShow();
         }
 
-        private void MainWindowClosed(object sender, EventArgs e)
-        {
-            TcpClientService.Dispose();
-        }
+        #endregion
 
-
-        #endregion 
 
         private void OpenSettingsWindow()
         {
@@ -127,7 +111,6 @@ namespace AdamDevelopmentEnvironment.ViewModels
 
             set
             {
-                LoggerService.WriteDebugLog($"Update {nameof(BlocklyWidthRegion)} with value {value.Value}");
                 SetProperty(ref mBlocklyWidthRegion, value.Value);
                 Settings.Default.BlocklyWidthRegion = value.Value;
             } 
@@ -145,7 +128,6 @@ namespace AdamDevelopmentEnvironment.ViewModels
 
             set
             {
-                LoggerService.WriteDebugLog($"Update {nameof(SourceEditorHeight)} with value {value.Value}");
                 SetProperty(ref mSourceEditorHeight, value.Value);
                 Settings.Default.SourceEditorHeight = value.Value;
             } 

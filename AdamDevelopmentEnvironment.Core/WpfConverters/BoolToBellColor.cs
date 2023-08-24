@@ -1,7 +1,7 @@
 ﻿using System;
+using System.Drawing;
 using System.Globalization;
 using System.Windows.Data;
-
 
 namespace AdamDevelopmentEnvironment.Core.WpfConverters
 {
@@ -13,9 +13,9 @@ namespace AdamDevelopmentEnvironment.Core.WpfConverters
             bool isGrowlHapened = (bool)value;
 
             if (isGrowlHapened)
-                return "Red";
-
-            return "Black";
+                return Color.DarkRed.Name;
+            
+            return Color.Black.Name;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

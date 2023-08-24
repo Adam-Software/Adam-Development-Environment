@@ -45,7 +45,6 @@ namespace AdamDevelopmentEnvironment.Services
 
         public bool IsConnected { get; private set; }
 
-
         public Task ConnectAsync()
         {
             Task task;
@@ -90,10 +89,10 @@ namespace AdamDevelopmentEnvironment.Services
         {
             Task task = Task.CompletedTask;
 
-            if (mTcpClient.IsConnected)
+            if (IsConnected)
                 task = DisconnectAsync();
 
-            if (!mTcpClient.IsConnected)
+            if (IsConnected)
                 task = ConnectAsync();
 
             return task;

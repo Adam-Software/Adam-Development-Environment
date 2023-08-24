@@ -1,7 +1,6 @@
 ﻿using HandyControl.Controls;
 using HandyControl.Data;
 using System;
-using System.Windows.Navigation;
 
 namespace AdamDevelopmentEnvironment.Core.Notification
 {
@@ -15,10 +14,10 @@ namespace AdamDevelopmentEnvironment.Core.Notification
             GrowlInfo gf = new()
             {
                 Message = message,
-                StaysOpen = true,
+                StaysOpen = false,
                 IsCustom = true,
                 ShowCloseButton = false,
-                WaitTime = 3,
+                WaitTime = 5,
                 Token = "GrowlToNotifyBar",
             };
 
@@ -42,10 +41,10 @@ namespace AdamDevelopmentEnvironment.Core.Notification
             GrowlInfo gf = new()
             {
                 Message = message,
-                StaysOpen = true,
+                StaysOpen = false,
                 IsCustom = true,
-                ShowCloseButton = false,
-                WaitTime = 3,
+                ShowCloseButton = true,
+                WaitTime = 5,
                 Token = "GrowlToNotifyBar",
             };
 
@@ -71,17 +70,15 @@ namespace AdamDevelopmentEnvironment.Core.Notification
                 Message = message,
                 StaysOpen = true,
                 IsCustom = true,
-                ShowCloseButton = false,
+                ShowCloseButton = true,
                 CancelStr = "Отменить",
                 ConfirmStr = "Подтвердить",
-                WaitTime = 3,
                 Token = "GrowlToNotifyBar",
-                ActionBeforeClose = actionBeforeClose
+                ActionBeforeClose = actionBeforeClose,
             };
 
             Growl.Ask(gf);
             
-
             if (NotShowClobalGrowl)
                 return;
 

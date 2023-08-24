@@ -22,13 +22,15 @@ namespace AdamDevelopmentEnvironment
 {
     public partial class App : PrismApplication
     {
-        private ILoggerService LoggerService { get; set; } = new LoggerService();
+        private ILoggerService LoggerService { get; } = new LoggerService();
+        private ITcpClientService TcpClientService { get; }
 
         public App()
         {
+            TcpClientService = new TcpClientService(LoggerService);
+
             Dispatcher.UnhandledException += OnDispatcherUnhandledException;
         }
-
 
         protected override HandyWindow CreateShell()
         {
@@ -51,7 +53,7 @@ namespace AdamDevelopmentEnvironment
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
             containerRegistry.RegisterSingleton<ILoggerService>(()=> LoggerService);
-            containerRegistry.RegisterSingleton<ITcpClientService>(() => new TcpClientService(LoggerService));
+            containerRegistry.RegisterSingleton<ITcpClientService>(() => TcpClientService);
 
             containerRegistry.RegisterSingleton<IApplicationCommands>(() => new ApplicationCommands());
             containerRegistry.RegisterSingleton<IApplicationGrowls>(() => new ApplicationGrowls());
@@ -84,6 +86,7 @@ namespace AdamDevelopmentEnvironment
         private void OnAppCrashOrExit()
         {
             Settings.Default.PropertyChanged -= OnPropertyChange;
+            TcpClientService.Dispose();
             LoggerService.Dispose();
         }
 
